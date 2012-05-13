@@ -1,0 +1,40 @@
+<%
+  if !!local_assigns[:apply_css] and (classes = menu_branch_css(local_assigns)).any?
+    css = "class='#{classes.join(' ')}'".html_safe
+  end
+  
+  if menu_branch.ancestors.length == 0 
+    parent_css = "dropdown"
+    parent_title = link_to(raw("#{menu_branch.title.upcase} <b class=\"caret\"></b>"), "#menu_#{menu_branch.title}", :class => "dropdown-toggle", "data-toggle" => "dropdown")
+  else
+    parent_css = "nav-header"    
+    parent_title = menu_branch.title.upcase
+  end
+  
+-%>
+  <% if ( (children = menu_branch.children unless hide_children).present? &&
+          (!local_assigns[:menu_levels] || menu_branch.ancestors.length < local_assigns[:menu_levels]) ) -%>
+    <li id="menu_<%= menu_branch.title %>" class="<%= parent_css %>">
+    <%= parent_title -%>
+    <% if menu_branch.ancestors.length == 0 %>
+        <ul class='dropdown-menu'>
+    <% end %>
+      <%= render :partial => '/refinery/bootstrap/menu_branch', :collection => children,
+                 :locals => {
+                   :apply_css => local_assigns[:apply_css],
+                   :hide_children => !!hide_children,
+                   :menu_levels => local_assigns[:menu_levels]
+                 } -%>
+    <% if menu_branch.ancestors.length == 0 %>
+        </ul>
+    <% end %>
+  <% else -%>
+    <li<%= ['', css].compact.join(' ').gsub(/\ *$/, '').html_safe %>>
+	<%= link_to(menu_branch.title.upcase, refinery.url_for(menu_branch.url)) -%>
+  <% end -%>
+</li>
+
+<% if (!classes.include?(Refinery::Core.menu_css[:last]) && menu_branch.ancestors.length == 0) then %>
+    <li class="divider-vertical"></li>
+<% end %>
+

@@ -1,0 +1,27 @@
+nb:
+  refinery:
+    plugins:
+      bootstrap:
+        title: Bootstrap
+    bootstraps:
+      admin:
+        bootstrap:
+          actions:
+            create_new: Lag en ny Bootstrap
+            reorder: Endre rekkefølgen på Bootstrap
+            reorder_done: Ferdig å endre rekkefølgen Bootstrap
+          records:
+            title: Bootstrap
+            sorry_no_results: Beklager! Vi fant ikke noen resultater.
+            no_items_yet: Det er ingen Bootstraps enda. Klikk på "Lag en ny Bootstrap" for å legge til din første bootstrap.
+          bootstrap:
+            view_live_html: Vis hvordan denne bootstrap ser ut offentlig <br/><em>(åpner i et nytt vindu)</em>
+            edit: Rediger denne bootstrap
+            delete: Fjern denne bootstrap permanent
+      bootstraps:
+        show:
+          other: Andre Bootstrap
+  activerecord:
+    attributes:
+      'refinery/bootstrap/bootstrap':
+        title: Title

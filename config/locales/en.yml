@@ -1,0 +1,27 @@
+en:
+  refinery:
+    plugins:
+      bootstrap:
+        title: Bootstrap
+    bootstrap:
+      admin:
+        bootstrap:
+          actions:
+            create_new: Add New Bootstrap
+            reorder: Reorder Bootstrap
+            reorder_done: Done Reordering Bootstrap
+          records:
+            title: Bootstrap
+            sorry_no_results: Sorry! There are no results found.
+            no_items_yet: There are no Bootstrap yet. Click "Add New Bootstrap" to add your first bootstrap.
+          bootstrap:
+            view_live_html: View this bootstrap live <br/><em>(opens in a new window)</em>
+            edit: Edit this bootstrap
+            delete: Remove this bootstrap forever
+      bootstrap:
+        show:
+          other: Other Bootstrap
+  activerecord:
+    attributes:
+      'refinery/bootstrap/bootstrap':
+        title: Title

@@ -1,0 +1,28 @@
+es:
+  refinery:
+    plugins:
+      bootstrap:
+        title: Bootstrap
+#        article: masculino/femenino
+    bootstrap:
+      admin:
+        bootstrap:
+          actions:
+            create_new: Crear nuevo bootstrap
+            reorder: Reordenar bootstrap
+            reorder_done: Reordenación de bootstrap completada
+          records:
+            title: Bootstrap
+            sorry_no_results: Lo siento, no hay resultados
+            no_items_yet: No hay bootstrap todavía. Pulsa en "Crear nuevo Bootstrap" para crear tu primer bootstrap.
+          bootstrap:
+            view_live_html: Ver este bootstrap como abierto al público <br/><em>(abre en ventana nueva)</em>
+            edit: Editar este bootstrap
+            delete: Borrar este bootstrap para siempre
+      bootstrap:
+        show:
+          other: Otros bootstrap
+  activerecord:
+    attributes:
+      'refinery/bootstrap/bootstrap':
+        title: Title

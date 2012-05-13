@@ -1,0 +1,27 @@
+nl:
+  refinery:
+    plugins:
+      bootstrap:
+        title: Bootstrap
+    bootstrap:
+      admin:
+        bootstrap:
+          actions:
+            create_new: Maak een nieuwe Bootstrap
+            reorder: Wijzig de volgorde van de Bootstrap
+            reorder_done: Klaar met het wijzingen van de volgorde van de Bootstrap
+          records:
+            title: Bootstrap
+            sorry_no_results: Helaas! Er zijn geen resultaten gevonden.
+            no_items_yet: Er zijn nog geen Bootstraps. Druk op 'Maak een nieuwe Bootstrap' om de eerste aan te maken.
+          bootstrap:
+            view_live_html: Bekijk deze bootstrap op de website <br/><em>(opent een nieuw venster)</em>
+            edit: Bewerk deze bootstrap
+            delete: Verwijder deze bootstrap voor eeuwig
+      bootstrap:
+        show:
+          other: Andere Bootstrap
+  activerecord:
+    attributes:
+      'refinery/bootstrap/bootstrap':
+        title: Title

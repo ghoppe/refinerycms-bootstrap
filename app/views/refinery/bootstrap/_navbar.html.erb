@@ -1,0 +1,9 @@
+<% nav_class = "navbar"; nav_class << " navbar-fixed-top" if local_assigns[:fixed].present? %>
+<div class="<%= nav_class %>">
+  <div class="navbar-inner">
+    <div class="container">
+    	<%= link_to Refinery::Core.site_name, refinery.root_path, :class => "brand" if local_assigns[:brand].present?  %>
+      <%= render(:partial => "/refinery/bootstrap/menu") %>
+    </div>
+  </div>
+</div>
