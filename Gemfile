@@ -1,8 +1,8 @@
-source "http://rubygems.org"
+source :rubygems
 
 gemspec
 
-gem 'refinerycms', '~> 2.0.0', :git => 'git://github.com/resolve/refinerycms.git'
+gem 'refinerycms', '~> 2.0.3'
 
 # Refinery/rails should pull in the proper versions of these
 group :assets do
