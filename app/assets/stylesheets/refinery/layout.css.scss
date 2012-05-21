@@ -214,7 +214,7 @@ a:hover {
   color: #000;
   border-bottom: 1px solid #727272;
 }
-#content .wym_box a, #content .ui-tabs a {
+#content .wym_box a, #content .ui-tabs a, #content .pagination a {
   border-bottom: 0px none;
 }
 .index #content, .splash #content {
@@ -906,7 +906,6 @@ body.dialog form {
   .pagination {
     margin: 0px;
     position: fixed;
-    bottom: 5px;
     right: 12px;
     z-index: 1000;
   }
