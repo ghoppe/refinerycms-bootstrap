@@ -4,6 +4,7 @@ Gem::Specification.new do |s|
   s.platform          = Gem::Platform::RUBY
   s.name              = 'refinerycms-bootstrap'
   s.version           = '2.0.3'
+  s.author            = 'Glenn Hoppe'
   s.description       = 'Ruby on Rails Bootstrap extension for Refinery CMS'
   s.date              = '2012-03-09'
   s.summary           = 'Bootstrap extension for Refinery CMS'

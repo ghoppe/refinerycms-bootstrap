@@ -800,6 +800,12 @@ body.dialog form {
 	height: 250px;
 }
 .dialog {
+  .pagination {
+    bottom: 32px;
+    a {
+        border: none;
+    }
+  }
   #dialog_main {
     float: left;
     margin-left: 130px;
@@ -817,7 +823,7 @@ body.dialog form {
   }
   #dialog_menu_left {
     position: fixed;
-    left: 12px;
+    left: 36px;
     top: 9px;
     width: 130px;
   }
