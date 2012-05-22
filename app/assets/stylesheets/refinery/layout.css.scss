@@ -1,3 +1,4 @@
+@import "bootstrap";
 /*==================================
 =     Mixins
 ==================================*/
@@ -827,64 +828,6 @@ body.dialog form {
     top: 9px;
     width: 130px;
   }
-  #existing_image_content {
-    position: relative;
-    height: 300px;
-    padding: 12px;
-  }
-  #existing_image_area_content {
-    margin-top: 28px;
-    ul {
-      margin: 0px;
-      padding: 0px;
-      li {
-        list-style: none;
-        padding: 0px;
-        margin: 0px 2px 0px 0px;
-        float: left;
-        height: 114px;
-        max-height: 114px;
-        width: 114px;
-        max-width: 114px;
-        overflow: hidden;
-        cursor: pointer;
-        text-align: center;
-        vertical-align: middle;
-        img {
-          border: 4px solid transparent;
-        }
-        &.selected img {
-          border: 4px solid #22A7F2;
-        }
-      }
-    }
-  }
-  #existing_image_size_area {
-    margin-top: 18px;
-    ul {
-      margin: 0px;
-      padding: 10px 0px 0px 0px;
-      li {
-        float: left;
-        list-style: none;
-        margin: 0px 18px 0px 0px;
-        text-align:center;
-        a {
-          display: block;
-          border: 1px solid #999999;
-          font-size: 10px;
-        }
-        &.selected {
-          a {
-            border-color: #22A7F2;
-            background: #22A7F2;
-            color: white;
-            font-weight: bold;
-          }
-        }
-      }
-    }
-  }
   #existing_image_size_area {
     #image_dialog_size_0 a { height: 30px; width: 30px; line-height: 30px; margin-top: 10px }
     #image_dialog_size_1 a { height: 50px; width: 50px; line-height: 50px; margin-top:  0px }
@@ -1085,15 +1028,12 @@ a#toggle_advanced_options:hover {
 /* dialog stuff */
 #dialog_frame {
   width:952px;
-  height:460px;
+  height:512px;
   padding: 0px;
   border: 0px solid #F2F1ED;
 }
 .wym_hideables {
   display: none;
-}
-.dialog form {
-  margin-bottom: 45px;
 }
 .dialog .dialog_area > div > .field label:first-child, .dialog .dialog_area > div > label:first-child {
   margin-top: 0px;
@@ -1498,6 +1438,12 @@ a.information:hover {
 
 .control-group.larger label, .control-group.larger input  {
     font-size: 18px;
+}
+
+.thumbnails li div.thumbnail.selected {
+  border-color: $linkColor;
+  background-color: $linkColor;
+  @include box-shadow(0 1px 4px rgba(0,105,214,.25));
 }
 
 /* Internet Explorer to follow: */

@@ -5,9 +5,9 @@
 <% if @images.any? %>
     <ul class="thumbnails">
       <% @images.each do |image| -%>
-        <li<%= " class='selected'" if @image_id == image.id %>>
+        <li<%= ' class="selected"' if @image_id == image.id %>>
           <div class="thumbnail">
-          <%= image_fu(image, '106x106#c', {
+          <%= image_fu(image, '88x88#c', {
                          :alt => image.title,
                          :title => image.title,
                          :id => "image_#{image.id}",
