@@ -708,19 +708,19 @@ function ImageDialog(options) {
     });
 
     // Select any currently selected, just uploaded...
-    if ((selected_img = $('#existing_image_area_content ul li.selected img')).length > 0) {
+    if ((selected_img = $('#existing_image_area_content ul li div.selected img')).length > 0) {
       self.toggle_image(selected_img.first());
     }
   };
 
   this.toggle_image = function(img) {
     if (img.length > 0) {
-      if (!self.settings.multiple) $('#existing_image_area_content ul li.selected').removeClass('selected');
+      if (!self.settings.multiple) $('#existing_image_area_content ul li div.selected').removeClass('selected');
 
       img.parent().toggleClass('selected');
       var imageId = img.attr('data-id');
-      var geometry = $('#existing_image_size_area li.selected a').attr('data-geometry');
-      var size = $('#existing_image_size_area li.selected a').attr('data-size');
+      var geometry = $('#existing_image_size_area li div.selected a').attr('data-geometry');
+      var size = $('#existing_image_size_area li div.selected a').attr('data-size');
       var resize = $("#wants_to_resize_image").is(':checked');
 
       image_url = resize ? img.attr('data-' + size) : img.attr('data-original');
@@ -745,7 +745,7 @@ function ImageDialog(options) {
 
   this.submit_image_choice = function(e) {
     e.preventDefault();
-    selected_images = $('#existing_image_area_content ul li.selected img');
+    selected_images = $('#existing_image_area_content ul li div.selected img');
     selected_images = self.settings.multiple ? selected_images.get() : selected_images.get(0);
 
     if(selected_images && $.isFunction(self.callback))
@@ -771,7 +771,7 @@ function ImageDialog(options) {
       $('#existing_image_size_area ul li').removeClass('selected');
       $(this).parent().addClass('selected');
       $('#existing_image_size_area #wants_to_resize_image').attr('checked', 'checked');
-      self.set_image($('#existing_image_area_content ul li.selected img'));
+      self.set_image($('#existing_image_area_content ul li div.selected img'));
       e.preventDefault();
     });
 
@@ -780,7 +780,7 @@ function ImageDialog(options) {
         $('#existing_image_size_area ul li:first a').click();
       } else {
         $('#existing_image_size_area ul li').removeClass('selected');
-        self.set_image($('#existing_image_area_content ul li.selected img'));
+        self.set_image($('#existing_image_area_content ul li div.selected img'));
       }
     });
 
@@ -1047,8 +1047,8 @@ var image_dialog = {
 
       $(img).parent().addClass('selected');
       var imageId = $(img).attr('data-id');
-      var geometry = $('#existing_image_size_area li.selected a').attr('data-geometry');
-      var size = $('#existing_image_size_area li.selected a').attr('data-size');
+      var geometry = $('#existing_image_size_area li div.selected a').attr('data-geometry');
+      var size = $('#existing_image_size_area li div.selected a').attr('data-size');
       var resize = $("#wants_to_resize_image").is(':checked');
 
       image_url = resize ? $(img).attr('data-' + size) : $(img).attr('data-original');
@@ -1073,7 +1073,7 @@ var image_dialog = {
 
   , submit_image_choice: function(e) {
     e.preventDefault();
-    if((img_selected = $('#existing_image_area_content ul li.selected img').get(0)) && $.isFunction(this.callback))
+    if((img_selected = $('#existing_image_area_content ul li div.selected img').get(0)) && $.isFunction(this.callback))
     {
       this.callback(img_selected);
     }
@@ -1097,7 +1097,7 @@ var image_dialog = {
       $('#existing_image_size_area ul li').removeClass('selected');
       $(this).parent().addClass('selected');
       $('#existing_image_size_area #wants_to_resize_image').attr('checked', 'checked');
-      image_dialog.set_image($('#existing_image_area_content ul li.selected img'));
+      image_dialog.set_image($('#existing_image_area_content ul li div.selected img'));
       e.preventDefault();
     });
 
@@ -1106,7 +1106,7 @@ var image_dialog = {
         $('#existing_image_size_area ul li:first a').click();
       } else {
         $('#existing_image_size_area ul li').removeClass('selected');
-        image_dialog.set_image($('#existing_image_area_content ul li.selected img'));
+        image_dialog.set_image($('#existing_image_area_content ul li div.selected img'));
       }
     });
 
