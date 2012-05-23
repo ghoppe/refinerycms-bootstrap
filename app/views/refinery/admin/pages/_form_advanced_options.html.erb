@@ -1,0 +1,119 @@
+<div id='more_options_field'>
+  <p>
+    <%= link_to t('.advanced_options'), "#",
+                :id => 'toggle_advanced_options',
+                :title => t('.toggle_advanced_options') %>
+  </p>
+  <span id='draft_field'>
+    <%= f.check_box :draft %>
+    <%= f.label :draft, t('.save_as_draft'),
+                :class => "stripped" %>
+  </span>
+</div>
+<div id='more_options' style="display:none;">
+  <div class="hemisquare">
+  <h2><%= t('.page_options') %></h2>
+  <fieldset class="well">
+
+    <div class="control-group">
+      <%= f.label :parent_id, t('.parent_page'), :class => 'control-label' %>        
+      <div class="controls">
+        <%= f.select :parent_id, nested_set_options(::Refinery::Page, @page) {|i| "#{'-' * i.level} #{i.title}" },
+                   :include_blank => true %>
+        <span class="help-inline"><%= refinery_help_tag t('.parent_page_help') %></span>
+      </div>
+    </div>
+    
+    <% if Refinery::Pages.use_layout_templates %>
+      <div class="control-group">
+      <%= f.label :layout_template, t('.layout_template'), :class => 'control-label' %>
+      <div class="controls">
+          <% if @page.parent_id? %>
+            <%= f.select(:layout_template, @valid_layout_templates, {:selected => @page.parent.layout_template}) %>
+          <% else %>
+            <%= f.select(:layout_template, @valid_layout_templates) %>
+          <% end %>
+        <span class="help-inline"><%= refinery_help_tag t('.layout_template_help') %></span>
+      </div>
+    </div>
+    <% end %>
+    
+    <% if Refinery::Pages.use_view_templates %>
+      <div class="control-group">
+        <%= f.label :view_template, t('.view_template'), :class => 'control-label' %>
+      <div class="controls">
+          <% if @page.parent_id? %>
+            <%= f.select(:view_template, @valid_view_templates.map{|t| [t.titleize, t]}, {:selected => @page.parent.view_template }) %>
+          <% else %>
+            <%= f.select(:view_template, @valid_view_templates.map{|t| [t.titleize, t]}) %>
+          <% end %>
+        <span class="help-inline"><%= refinery_help_tag t('.view_template_help') %></span>
+      </div>
+    </div>
+    <% end %>
+
+    <div class="control-group">
+      <%= f.label :menu_title, t('.menu_title'), :class => 'control-label' %>
+      <div class="controls">
+        <%= f.text_field :menu_title, :class => 'span4' %>
+        <span class="help-inline"><%= refinery_help_tag t('.menu_title_help') %></span>
+      </div>
+    </div>
+    
+    <% if Refinery::Pages.use_custom_slugs %>
+      <div class="control-group">
+      <%= f.label :custom_slug, t('.custom_slug'), :class => 'control-label' %>
+      <div class="controls">
+        <%= f.text_field :custom_slug, :class => 'span4' %>
+        <span class="help-inline"><%= refinery_help_tag t('.custom_slug_help') %></span>
+      </div>
+    </div>
+    <% end %>
+    
+    <div class="control-group">
+      <%= f.label :skip_to_first_child?, t('.skip_to_first_child') %>
+      <div class="controls">
+      <%= f.label :skip_to_first_child, :class => "checkbox" do %>
+        <%= f.check_box :skip_to_first_child %>
+        <%= t('.skip_to_first_child_label') %>
+        <span class="help-inline"><%= refinery_help_tag t('.skip_to_first_child_help') %></span>
+      <% end %>
+      </div>
+    </div>
+    
+    <div class="control-group">
+      <%= f.label :link_url, t('.link_url') %>
+      <div class="controls">
+        <%= f.text_field :link_url, :class => 'span4' %>
+        <span class="help-inline"><%= refinery_help_tag t('.link_url_help') %></span>
+      </div>
+    </div>
+      
+    <% content_for :javascripts do %>
+      <script>
+        $(document).ready(function(){
+          link_tester.init('<%= refinery.test_url_admin_pages_dialogs_path %>',
+                           '<%= refinery.test_email_admin_pages_dialogs_path %>');
+
+          link_tester.validate_url_textbox("#page_link_url")
+        });
+      </script>
+    <% end %>
+    
+    <div class="control-group">
+        <%= f.label :show_in_menu, t('.show_in_menu_title'),
+                    :id => 'page_show_in_menu_heading' %>
+      <div class="controls">
+        <%= f.label :show_in_menu, :class => "checkbox" do %>
+          <%= f.check_box :show_in_menu %>
+          <%= t('.show_in_menu_description') %>
+          <span class="help-inline"><%= refinery_help_tag t('.show_in_menu_help') %></span>
+        <% end %>       
+      </div>
+    </div>
+      
+  </fieldset>
+  </div>
+
+  <%= render 'form_advanced_options_seo', :f => f %>
+</div>
