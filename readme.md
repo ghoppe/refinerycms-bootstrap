@@ -1,10 +1,6 @@
 # Bootstrap extension for Refinery CMS.
 
-## How to build this extension as a gem
+Uses [bootstrap-sass](https://github.com/thomas-mcdonald/bootstrap-sass) for basic [Twitter Bootstrap](http://twitter.github.com/bootstrap/) functionality.
 
-    cd vendor/extensions/bootstrap
-    gem build refinerycms-bootstrap.gemspec
-    gem install refinerycms-bootstrap.gem
+Working on reworking CSS for /refinery/ administrative back-end.
 
-    # Sign up for a http://rubygems.org/ account and publish the gem
-    gem push refinerycms-bootstrap.gem
