@@ -9,13 +9,13 @@ group :assets do
   gem 'sass-rails'
   gem 'coffee-rails'
   gem 'uglifier'
-  gem 'bootstrap-sass', '~> 2.0.3'
+  gem 'bootstrap-sass', '~> 2.0.3', :branch => :master
 end
 
 gem 'jquery-rails'
 
 group :development, :test do
-  gem 'refinerycms-testing', '~> 2.0.0'
+  gem 'refinerycms-testing', '~> 2.0.1'
   gem 'factory_girl_rails'
   gem 'generator_spec'
 
