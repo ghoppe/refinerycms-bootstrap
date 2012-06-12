@@ -28,12 +28,9 @@
       <div class="control-group">
       <%= f.label :layout_template, t('.layout_template'), :class => 'control-label' %>
       <div class="controls">
-          <% if @page.parent_id? %>
-            <%= f.select(:layout_template, @valid_layout_templates, {:selected => @page.parent.layout_template}) %>
-          <% else %>
-            <%= f.select(:layout_template, @valid_layout_templates) %>
-          <% end %>
-        <span class="help-inline"><%= refinery_help_tag t('.layout_template_help') %></span>
+         <%= f.select :layout_template, @valid_layout_templates,
+                   template_options(:layout_template, @page) %>
+         <span class="help-inline"><%= refinery_help_tag t('.layout_template_help') %></span>
       </div>
     </div>
     <% end %>
@@ -42,11 +39,8 @@
       <div class="control-group">
         <%= f.label :view_template, t('.view_template'), :class => 'control-label' %>
       <div class="controls">
-          <% if @page.parent_id? %>
-            <%= f.select(:view_template, @valid_view_templates.map{|t| [t.titleize, t]}, {:selected => @page.parent.view_template }) %>
-          <% else %>
-            <%= f.select(:view_template, @valid_view_templates.map{|t| [t.titleize, t]}) %>
-          <% end %>
+        <%= f.select :view_template, @valid_view_templates.map { |t| [t.titleize, t] },
+                   template_options(:view_template, @page) %>
         <span class="help-inline"><%= refinery_help_tag t('.view_template_help') %></span>
       </div>
     </div>
