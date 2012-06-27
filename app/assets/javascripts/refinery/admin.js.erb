@@ -63,38 +63,40 @@ $.fn.applyMinimumHeightFromChildren = function() {
 }
 
 init_modal_dialogs = function(){
-  $('a[href*="dialog=true"]').not('#dialog_container a').each(function(i, anchor) {
-    $(anchor).data({
-      'dialog-width': parseInt($($(anchor).attr('href').match("width=([0-9]*)")).last().get(0), 10)||928
-      , 'dialog-height': parseInt($($(anchor).attr('href').match("height=([0-9]*)")).last().get(0), 10)||473
-      , 'dialog-title': ($(anchor).attr('title') || $(anchor).attr('name') || $(anchor).html() || null)
-    }).attr('href', $(anchor).attr('href').replace(/(\&(amp\;)?)?dialog\=true/, '')
-                                          .replace(/(\&(amp\;)?)?width\=\d+/, '')
-                                          .replace(/(\&(amp\;)?)?height\=\d+/, '')
-                                          .replace(/(\?&(amp\;)?)/, '?')
-                                          .replace(/\?$/, ''))
-    .click(function(e){
-      $anchor = $(this);
-      iframe_src = (iframe_src = $anchor.attr('href'))
-                   + (iframe_src.indexOf('?') > -1 ? '&' : '?')
-                   + 'app_dialog=true&dialog=true';
+  $(document).on('click', 'a[href*="dialog=true"]:not(#dialog_container a)', function(e) {
+    var $anchor = $(this),
+        href = $anchor.attr('href'),
+        width = parseInt($(href.match("width=([0-9]*)")).last().get(0), 10)||928,
+        height = parseInt($(href.match("height=([0-9]*)")).last().get(0), 10)||473,
+        title = $anchor.attr('title') || $anchor.attr('name') || $anchor.html() || null;
 
-      iframe = $("<iframe id='dialog_iframe' frameborder='0' marginheight='0' marginwidth='0' border='0'></iframe>");
-      if(!$.browser.msie) { iframe.corner('8px'); }
-      iframe.dialog({
-        title: $anchor.data('dialog-title')
-        , modal: true
-        , resizable: false
-        , autoOpen: true
-        , width: $anchor.data('dialog-width')
-        , height: $anchor.data('dialog-height')
-        , open: onOpenDialog
-        , close: onCloseDialog
-      });
+    href = href.replace(/((\&(amp\;)?)|\?)dialog\=true/, '')
+               .replace(/((\&(amp\;)?)|\?)width\=\d+/, '')
+               .replace(/((\&(amp\;)?)|\?)height\=\d+/, '')
+               .replace(/(\?&(amp\;)?)/, '?')
+               .replace(/\?$/, '');
 
-      iframe.attr('src', iframe_src);
-      e.preventDefault();
+    iframe_src = (iframe_src = href)
+                 + (iframe_src.indexOf('?') > -1 ? '&' : '?')
+                 + 'app_dialog=true&dialog=true';
+
+    iframe = $("<iframe id='dialog_iframe' frameborder='0' marginheight='0' marginwidth='0' border='0'></iframe>");
+    if(!$.browser.msie) { iframe.corner('8px'); }
+    iframe.dialog({
+      title: title
+      , modal: true
+      , resizable: false
+      , autoOpen: true
+      , width: width
+      , height: height
+      , open: onOpenDialog
+      , close: onCloseDialog
+			, open: function(event, ui) {
+				iframe.attr('src', iframe_src);
+			}
     });
+
+    e.preventDefault();
   });
 };
 
@@ -655,85 +657,72 @@ var page_options = {
 
 };
 
-// TODO:  Need to rewrite WYM to accept multiple images. As it stands, only
-//        the callback is useful when inserting multiple -- helpful for
-//        the page-images and portfolio engines.
+var image_dialog = {
+  initialised: false
+  , callback: null
 
-// ImageDialog
-// 
-//   The dialog that opens when choosing to 'Add image' in WYM.
-//
-//   Options:
-//     callback (null):
-//       a function to execute upon chosing 'submit'. Passed either an
-//       an array or a single image, depending on whether `multiple` is
-//       true.
-//     multiple (false):
-//       if true, enables selection of multiple images. Does not allow
-//       insertion into WYM without manual callback manipulation.
-function ImageDialog(options) {
-  self = this;
-  this.defaults = {callback: null, multiple: false};
-  this.settings = $.extend({}, this.defaults, options);
+  , init: function(callback){
 
-  this.create = function() {
+    if (!this.initialised) {
+      this.callback = callback;
+      this.init_tabs();
+      this.init_select();
+      this.init_actions();
+      this.initialised = true;
+    }
+    return this;
+  }
 
-    this.callback = this.settings.callback;
-    this.init_tabs();
-    this.init_select();
-    this.init_actions();
-  };
-
-  this.init_tabs = function() {
+  , init_tabs: function(){
     var radios = $('#dialog_menu_left input:radio');
     var selected = radios.parent().filter(".selected_radio").find('input:radio').first() || radios.first();
-    radios.click(function() {
-      self.switch_area($(this));
+
+    radios.click(function(){
+      link_dialog.switch_area($(this));
     });
 
     selected.attr('checked', 'true');
-    self.switch_area(selected);
-  };
+    link_dialog.switch_area(selected);
+  }
 
-  this.switch_area = function(radio) {
+  , switch_area: function(radio){
     $('#dialog_menu_left .selected_radio').removeClass('selected_radio');
-    radio.parent().addClass('selected_radio');
+    $(radio).parent().addClass('selected_radio');
     $('#dialog_main .dialog_area').hide();
-    $('#' + radio.val() + '_area').show();
-  };
+    $('#' + radio.value + '_area').show();
+  }
 
-  this.init_select = function() {
-    $('#existing_image_area_content ul li img').click(function() {
-      self.toggle_image($(this));
+  , init_select: function(){
+    $('#existing_image_area_content ul li img').click(function(){
+        image_dialog.set_image(this);
     });
-
-    // Select any currently selected, just uploaded...
-    if ((selected_img = $('#existing_image_area_content ul li div.selected img')).length > 0) {
-      self.toggle_image(selected_img.first());
+    //Select any currently selected, just uploaded...
+    if ((selected_img = $('#existing_image_area_content ul li.selected img')).length > 0) {
+      image_dialog.set_image(selected_img.first());
     }
-  };
+  }
 
-  this.toggle_image = function(img) {
-    if (img.length > 0) {
-      if (!self.settings.multiple) $('#existing_image_area_content ul li div.selected').removeClass('selected');
+  , set_image: function(img){
+    if ($(img).length > 0) {
+      $('#existing_image_area_content ul li.selected').removeClass('selected');
 
-      img.parent().toggleClass('selected');
-      var imageId = img.attr('data-id');
-      var geometry = $('#existing_image_size_area li div.selected a').attr('data-geometry');
-      var size = $('#existing_image_size_area li div.selected a').attr('data-size');
+      $(img).parent().addClass('selected');
+      var imageId = $(img).attr('data-id');
+      var geometry = $('#existing_image_size_area li.selected a').attr('data-geometry');
+      var size = $('#existing_image_size_area li.selected a').attr('data-size');
       var resize = $("#wants_to_resize_image").is(':checked');
 
-      image_url = resize ? img.attr('data-' + size) : img.attr('data-original');
+      image_url = resize ? $(img).attr('data-' + size) : $(img).attr('data-original');
 
       if (parent) {
         if ((wym_src = parent.document.getElementById('wym_src')) != null) {
           wym_src.value = image_url;
         }
         if ((wym_title = parent.document.getElementById('wym_title')) != null) {
-          wym_title.value = img.attr('title');
+          wym_title.value = $(img).attr('title');
         }
         if ((wym_alt = parent.document.getElementById('wym_alt')) != null) {
-          wym_alt.value = img.attr('alt');
+          wym_alt.value = $(img).attr('alt');
         }
         if ((wym_size = parent.document.getElementById('wym_size')) != null
             && typeof(geometry) != 'undefined') {
@@ -741,37 +730,35 @@ function ImageDialog(options) {
         }
       }
     }
-  };
+  }
 
-  this.submit_image_choice = function(e) {
+  , submit_image_choice: function(e) {
     e.preventDefault();
-    selected_images = $('#existing_image_area_content ul li div.selected img');
-    selected_images = self.settings.multiple ? selected_images.get() : selected_images.get(0);
-
-    if(selected_images && $.isFunction(self.callback))
+    if((img_selected = $('#existing_image_area_content ul li.selected img').get(0)) && $.isFunction(this.callback))
     {
-      self.callback(selected_images);
+      this.callback(img_selected);
     }
 
     close_dialog(e);
-  };
+  }
 
-  this.init_actions = function() {
+  , init_actions: function(){
+    var _this = this;
     // get submit buttons not inside a wymeditor iframe
     $('#existing_image_area .form-actions-dialog #submit_button')
       .not('.wym_iframe_body #existing_image_area .form-actions-dialog #submit_button')
-      .click($.proxy(self.submit_image_choice, self));
+      .click($.proxy(_this.submit_image_choice, _this));
 
     // get cancel buttons not inside a wymeditor iframe
     $('.form-actions-dialog #cancel_button')
       .not('.wym_iframe_body .form-actions-dialog #cancel_button')
-      .click($.proxy(close_dialog, self));
+      .click($.proxy(close_dialog, _this));
 
     $('#existing_image_size_area ul li a').click(function(e) {
       $('#existing_image_size_area ul li').removeClass('selected');
       $(this).parent().addClass('selected');
       $('#existing_image_size_area #wants_to_resize_image').attr('checked', 'checked');
-      self.set_image($('#existing_image_area_content ul li div.selected img'));
+      image_dialog.set_image($('#existing_image_area_content ul li.selected img'));
       e.preventDefault();
     });
 
@@ -780,7 +767,7 @@ function ImageDialog(options) {
         $('#existing_image_size_area ul li:first a').click();
       } else {
         $('#existing_image_size_area ul li').removeClass('selected');
-        self.set_image($('#existing_image_area_content ul li div.selected img'));
+        image_dialog.set_image($('#existing_image_area_content ul li.selected img'));
       }
     });
 
@@ -790,8 +777,8 @@ function ImageDialog(options) {
       $(this.document.getElementById('wym_dialog_submit')).click();
     }, parent));
     image_area.find('.form-actions a.close_dialog').click(close_dialog);
-  };
-}
+  }
+};
 
 var list_reorder = {
   initialised: false
@@ -959,10 +946,10 @@ var image_picker = {
   }
 
   , toggle_image: function(e) {
-    $(this.container).find(this.picker.options.image_toggler).html(
-      ($(this.container).find(this.picker.options.image_toggler).html() == 'Show' ? 'Hide' : 'Show')
+    $(this.container).find(this.options.image_toggler).html(
+      ($(this.container).find(options.image_toggler).html() == 'Show' ? 'Hide' : 'Show')
     );
-    $(this.container).find(this.picker.options.image_container).toggle();
+    $(this.container).find(this.options.image_container).toggle();
     e.preventDefault();
   }
 
@@ -993,129 +980,6 @@ var resource_picker = {
       this.callback = callback;
       this.initialised = true;
     }
-  }
-};
-
-var image_dialog = {
-  initialised: false
-  , callback: null
-
-  , init: function(callback){
-
-    if (!this.initialised) {
-      this.callback = callback;
-      this.init_tabs();
-      this.init_select();
-      this.init_actions();
-      this.initialised = true;
-    }
-    return this;
-  }
-
-  , init_tabs: function(){
-    var radios = $('#dialog_menu_left input:radio');
-    var selected = radios.parent().filter(".selected_radio").find('input:radio').first() || radios.first();
-
-    radios.click(function(){
-      link_dialog.switch_area($(this));
-    });
-
-    selected.attr('checked', 'true');
-    link_dialog.switch_area(selected);
-  }
-
-  , switch_area: function(radio){
-    $('#dialog_menu_left .selected_radio').removeClass('selected_radio');
-    $(radio).parent().addClass('selected_radio');
-    $('#dialog_main .dialog_area').hide();
-    $('#' + radio.value + '_area').show();
-  }
-
-  , init_select: function(){
-    $('#existing_image_area_content ul li img').click(function(){
-        image_dialog.set_image(this);
-    });
-    //Select any currently selected, just uploaded...
-    if ((selected_img = $('#existing_image_area_content ul li div.selected img')).length > 0) {
-      image_dialog.set_image(selected_img.first());
-    }
-  }
-
-  , set_image: function(img){
-    if ($(img).length > 0) {
-      $('#existing_image_area_content ul li div.selected').removeClass('selected');
-
-      $(img).parent().addClass('selected');
-      var imageId = $(img).attr('data-id');
-      var geometry = $('#existing_image_size_area li div.selected a').attr('data-geometry');
-      var size = $('#existing_image_size_area li div.selected a').attr('data-size');
-      var resize = $("#wants_to_resize_image").is(':checked');
-
-      image_url = resize ? $(img).attr('data-' + size) : $(img).attr('data-original');
-
-      if (parent) {
-        if ((wym_src = parent.document.getElementById('wym_src')) != null) {
-          wym_src.value = image_url;
-        }
-        if ((wym_title = parent.document.getElementById('wym_title')) != null) {
-          wym_title.value = $(img).attr('title');
-        }
-        if ((wym_alt = parent.document.getElementById('wym_alt')) != null) {
-          wym_alt.value = $(img).attr('alt');
-        }
-        if ((wym_size = parent.document.getElementById('wym_size')) != null
-            && typeof(geometry) != 'undefined') {
-          wym_size.value = geometry.replace(/[<>=]/g, '');
-        }
-      }
-    }
-  }
-
-  , submit_image_choice: function(e) {
-    e.preventDefault();
-    if((img_selected = $('#existing_image_area_content ul li div.selected img').get(0)) && $.isFunction(this.callback))
-    {
-      this.callback(img_selected);
-    }
-
-    close_dialog(e);
-  }
-
-  , init_actions: function(){
-    var _this = this;
-    // get submit buttons not inside a wymeditor iframe
-    $('#existing_image_area .form-actions-dialog #submit_button')
-      .not('.wym_iframe_body #existing_image_area .form-actions-dialog #submit_button')
-      .click($.proxy(_this.submit_image_choice, _this));
-
-    // get cancel buttons not inside a wymeditor iframe
-    $('.form-actions-dialog #cancel_button')
-      .not('.wym_iframe_body .form-actions-dialog #cancel_button')
-      .click($.proxy(close_dialog, _this));
-
-    $('#existing_image_size_area ul li a').click(function(e) {
-      $('#existing_image_size_area ul li').removeClass('selected');
-      $(this).parent().addClass('selected');
-      $('#existing_image_size_area #wants_to_resize_image').attr('checked', 'checked');
-      image_dialog.set_image($('#existing_image_area_content ul li div.selected img'));
-      e.preventDefault();
-    });
-
-    $('#existing_image_size_area #wants_to_resize_image').change(function(){
-      if($(this).is(":checked")) {
-        $('#existing_image_size_area ul li:first a').click();
-      } else {
-        $('#existing_image_size_area ul li').removeClass('selected');
-        image_dialog.set_image($('#existing_image_area_content ul li div.selected img'));
-      }
-    });
-
-    image_area = $('#existing_image_area').not('#wym_iframe_body #existing_image_area');
-    image_area.find('.form-actions input#submit_button').click($.proxy(function(e) {
-      e.preventDefault();
-      $(this.document.getElementById('wym_dialog_submit')).click();
-    }, parent));
-    image_area.find('.form-actions a.close_dialog').click(close_dialog);
   }
 };
 
