@@ -53,7 +53,7 @@
     <%= link_to(cancel_button_text, cancel_url,
                 :title => cancel_title,
                 :id => cancel_button_id,
-                :class => "btn") unless hide_cancel %>
+                :class => "close_dialog btn") unless hide_cancel %>
 
     <%= local_assigns[:after_cancel_button] -%>
 

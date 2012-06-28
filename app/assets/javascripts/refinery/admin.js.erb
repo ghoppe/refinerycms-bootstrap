@@ -706,7 +706,7 @@ var image_dialog = {
     if ($(img).length > 0) {
       $('#existing_image_area_content ul li.selected').removeClass('selected');
 
-      $(img).parent().addClass('selected');
+      $(img).parent().parent().addClass('selected');
       var imageId = $(img).attr('data-id');
       var geometry = $('#existing_image_size_area li.selected a').attr('data-geometry');
       var size = $('#existing_image_size_area li.selected a').attr('data-size');
