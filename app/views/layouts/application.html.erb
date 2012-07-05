@@ -1,21 +1,19 @@
 <!DOCTYPE html>
-<%= render '/refinery/html_tag' %>
+  <%= render '/refinery/html_tag' %>
   <% site_bar = render('/refinery/site_bar', :head => true) -%>
   <%= render '/refinery/head' %>
   <body>
     <%= site_bar -%>
     <%= render '/refinery/ie6check' if request.env['HTTP_USER_AGENT'] =~ /MSIE/ -%>
-    <div id="page_container" class="container">
-      <header id="header">
-        <%= render '/refinery/header' -%>
-      </header>
-      <div id="page">
-        <%= yield %>
-      </div>
-      <footer>
-        <%= render '/refinery/footer' -%>
-      </footer>
+    <header class="container">
+    	<%= render '/refinery/header' -%>
+    </header>
+    <div id="page" class="container">
+      <%= yield %>
     </div>
+    <footer class="container">
+      <%= render '/refinery/footer' -%>
+    </footer>
     <%= render '/refinery/javascripts' %>
   </body>
 </html>

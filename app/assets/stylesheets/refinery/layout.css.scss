@@ -1,4 +1,37 @@
 @import "bootstrap";
+
+.navbar .dropdown.open .dropdown-toggle {
+	color: $navbarLinkColorHover;
+}
+
+.navbar .nav > li > a {
+	font-size: 88%;
+	font-weight: 500;
+    text-shadow: 1px 1px 1px white;
+}
+
+.navbar li li {
+	font-size: 100%;
+}
+
+.navbar li li a:hover {
+	text-shadow: 0px 1px 2px #555;
+}
+
+.navbar .nav .active > a, 
+.navbar .nav .active > a:hover {
+	border-bottom: 3px $linkColor solid;
+}
+
+.navbar li li.active a:hover {
+	text-shadow: none;
+}
+
+.navbar .divider-vertical {
+	margin: 0;
+}
+
+
 /*==================================
 =     Mixins
 ==================================*/
@@ -1018,12 +1051,6 @@ ul#page_parts_controls img {
   clear:left;
 }
 a#toggle_advanced_options {
-	background: image_url('refinery/icons/page_white_gear.png') no-repeat 0px 3px;
-	padding: 5px 5px 5px 22px;
-	border-bottom: none;
-}
-a#toggle_advanced_options:hover {
-	border-bottom:1px dotted #727272;
 }
 /* dialog stuff */
 #dialog_frame {
@@ -1199,10 +1226,6 @@ span.button-wrapper {
 }
 span.button-wrapper input {
 	display: inherit;
-}
-/* fixes firefox display */
-input.button {
-  padding-bottom: 3px;
 }
 input.button.close_dialog, a.button.close_dialog, #content a.button.close_dialog, span.button-wrapper.close_dialog, span.button-wrapper.close_dialog input {
   background: #bcbcbc;
