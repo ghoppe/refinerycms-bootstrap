@@ -1,37 +1,5 @@
 @import "bootstrap";
 
-.navbar .dropdown.open .dropdown-toggle {
-	color: $navbarLinkColorHover;
-}
-
-.navbar .nav > li > a {
-	font-size: 88%;
-	font-weight: 500;
-    text-shadow: 1px 1px 1px white;
-}
-
-.navbar li li {
-	font-size: 100%;
-}
-
-.navbar li li a:hover {
-	text-shadow: 0px 1px 2px #555;
-}
-
-.navbar .nav .active > a, 
-.navbar .nav .active > a:hover {
-	border-bottom: 3px $linkColor solid;
-}
-
-.navbar li li.active a:hover {
-	text-shadow: none;
-}
-
-.navbar .divider-vertical {
-	margin: 0;
-}
-
-
 /*==================================
 =     Mixins
 ==================================*/
