@@ -3,7 +3,21 @@
   <div class="navbar-inner">
     <div class="container">
     	<%= link_to Refinery::Core.site_name, refinery.root_path, :class => "brand" if local_assigns[:brand].present?  %>
-      <%= render(:partial => "/refinery/bootstrap/menu") %>
+    	<% if local_assigns[:responsive].present? %>
+    		<a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+    			<span class="icon-bar"></span>
+    			<span class="icon-bar"></span>
+    			<span class="icon-bar"></span>
+    		</a>
+    	<% end %>
+    	<% if local_assigns[:responsive].present? %>
+    		<%= render(:partial => "/refinery/bootstrap/menu", :locals => {:roots => refinery_menu_pages[0..local_assigns[:responsive]] }) %>
+    		<div class="nav-collapse">
+      		<%= render(:partial => "/refinery/bootstrap/menu", :locals =>  {:roots => refinery_menu_pages[local_assigns[:responsive]+1..-1] }) %>
+      	</div>
+      <% else %>
+      	<%= render(:partial => "/refinery/bootstrap/menu") %>
+    	<% end %>
     </div>
   </div>
 </div>

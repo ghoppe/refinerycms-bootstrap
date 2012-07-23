@@ -2,20 +2,20 @@ source :rubygems
 
 gemspec
 
-gem 'refinerycms', '~> 2.0.4'
+gem 'refinerycms', '~> 2.1.0.dev', :git => 'git://github.com/resolve/refinerycms.git'
 
 # Refinery/rails should pull in the proper versions of these
 group :assets do
   gem 'sass-rails'
   gem 'coffee-rails'
   gem 'uglifier'
-  gem 'bootstrap-sass', '~> 2.0.3'
+  gem 'bootstrap-sass', '~> 2.0.4.0'
 end
 
 gem 'jquery-rails'
 
 group :development, :test do
-  gem 'refinerycms-testing', '~> 2.0.0'
+  gem 'refinerycms-testing', '~> 2.1.0.dev'
   gem 'factory_girl_rails'
   gem 'generator_spec'
 
