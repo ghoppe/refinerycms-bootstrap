@@ -2,7 +2,7 @@ source :rubygems
 
 gemspec
 
-gem 'refinerycms', '~> 2.1.0.dev', :git => 'git://github.com/resolve/refinerycms.git'
+gem 'refinerycms', '~> 2.0.5'
 
 # Refinery/rails should pull in the proper versions of these
 group :assets do
@@ -15,7 +15,7 @@ end
 gem 'jquery-rails'
 
 group :development, :test do
-  gem 'refinerycms-testing', '~> 2.1.0.dev'
+  gem 'refinerycms-testing', '~> 2.0.0'
   gem 'factory_girl_rails'
   gem 'generator_spec'
 
