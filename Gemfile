@@ -2,37 +2,20 @@ source :rubygems
 
 gemspec
 
-gem 'refinerycms', '~> 2.0.5'
+git 'git://github.com/resolve/refinerycms.git' do
+  gem 'refinerycms'
 
-# Refinery/rails should pull in the proper versions of these
-group :assets do
-  gem 'sass-rails'
-  gem 'coffee-rails'
-  gem 'uglifier'
-  gem 'bootstrap-sass', '~> 2.0.4.0'
+  group :development, :test do
+    gem 'refinerycms-testing'
+  end
 end
 
-gem 'jquery-rails'
-
 group :development, :test do
-  gem 'refinerycms-testing', '~> 2.0.0'
-  gem 'factory_girl_rails'
-  gem 'generator_spec'
-
   require 'rbconfig'
 
-  platforms :jruby do
-    gem 'activerecord-jdbcsqlite3-adapter'
-    gem 'activerecord-jdbcmysql-adapter'
-    gem 'activerecord-jdbcpostgresql-adapter'
-    gem 'jruby-openssl'
-  end
+  gem 'sqlite3', :platform => [:ruby, :mswin, :mingw]
 
-  unless defined?(JRUBY_VERSION)
-    gem 'sqlite3'
-    gem 'mysql2'
-    gem 'pg'
-  end
+  gem 'activerecord-jdbcsqlite3-adapter', :platform => :jruby
 
   platforms :mswin, :mingw do
     gem 'win32console'
@@ -52,6 +35,7 @@ group :development, :test do
       if RbConfig::CONFIG['target_os'] =~ /linux/i
         gem 'rb-inotify', '>= 0.5.1'
         gem 'libnotify',  '~> 0.1.3'
+        gem 'therubyracer', '~> 0.9.9'
       end
     end
   end
@@ -68,3 +52,13 @@ group :development, :test do
     end
   end
 end
+
+# Refinery/rails should pull in the proper versions of these
+group :assets do
+  gem 'sass-rails'
+  gem 'coffee-rails'
+  gem 'uglifier'
+  gem 'bootstrap-sass', '~> 2.0.4.0'
+end
+
+gem 'jquery-rails'
