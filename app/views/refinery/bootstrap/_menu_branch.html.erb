@@ -34,7 +34,7 @@
   <% end -%>
 </li>
 
-<% if (!classes.include?(Refinery::Core.menu_css[:last]) && menu_branch.ancestors.length == 0) then %>
+<% if (local_assigns[:divider] && (local_assigns[:divider] == :after_except_last && !classes.include?(Refinery::Core.menu_css[:last]) || local_assigns[:divider] == :after ) && menu_branch.ancestors.length == 0) then %>
     <li class="divider-vertical"></li>
 <% end %>
 
