@@ -63,40 +63,35 @@ $.fn.applyMinimumHeightFromChildren = function() {
 }
 
 init_modal_dialogs = function(){
-  $(document).on('click', 'a[href*="dialog=true"]:not(#dialog_container a)', function(e) {
-    var $anchor = $(this),
-        href = $anchor.attr('href'),
-        width = parseInt($(href.match("width=([0-9]*)")).last().get(0), 10)||928,
-        height = parseInt($(href.match("height=([0-9]*)")).last().get(0), 10)||473,
-        title = $anchor.attr('title') || $anchor.attr('name') || $anchor.html() || null;
+  $('a[href*="dialog=true"]').not('#dialog_container a').each(function(i, anchor) {
+    $(anchor).data({
+      'dialog-width': parseInt($($(anchor).attr('href').match("width=([0-9]*)")).last().get(0), 10)||928
+      , 'dialog-height': parseInt($($(anchor).attr('href').match("height=([0-9]*)")).last().get(0), 10)||473
+      , 'dialog-title': ($(anchor).attr('title') || $(anchor).attr('name') || $(anchor).html() || null)
+    }).attr('href', $(anchor).attr('href').replace(/(&(amp;)?|\?)(dialog=true|(width|height)=\d+)/g, '')
+                                          .replace(/(\/[^&\?]*)&(amp;)?/, '$1?'))
+    .click(function(e){
+      $anchor = $(this);
+      iframe_src = (iframe_src = $anchor.attr('href'))
+                   + (iframe_src.indexOf('?') > -1 ? '&' : '?')
+                   + 'app_dialog=true&dialog=true';
 
-    href = href.replace(/((\&(amp\;)?)|\?)dialog\=true/, '')
-               .replace(/((\&(amp\;)?)|\?)width\=\d+/, '')
-               .replace(/((\&(amp\;)?)|\?)height\=\d+/, '')
-               .replace(/(\?&(amp\;)?)/, '?')
-               .replace(/\?$/, '');
+      iframe = $("<iframe id='dialog_iframe' frameborder='0' marginheight='0' marginwidth='0' border='0'></iframe>");
+      if(!$.browser.msie) { iframe.corner('8px'); }
+      iframe.dialog({
+        title: $anchor.data('dialog-title')
+        , modal: true
+        , resizable: false
+        , autoOpen: true
+        , width: $anchor.data('dialog-width')
+        , height: $anchor.data('dialog-height')
+        , open: onOpenDialog
+        , close: onCloseDialog
+      });
 
-    iframe_src = (iframe_src = href)
-                 + (iframe_src.indexOf('?') > -1 ? '&' : '?')
-                 + 'app_dialog=true&dialog=true';
-
-    iframe = $("<iframe id='dialog_iframe' frameborder='0' marginheight='0' marginwidth='0' border='0'></iframe>");
-    if(!$.browser.msie) { iframe.corner('8px'); }
-    iframe.dialog({
-      title: title
-      , modal: true
-      , resizable: false
-      , autoOpen: true
-      , width: width
-      , height: height
-      , open: onOpenDialog
-      , close: onCloseDialog
-			, open: function(event, ui) {
-				iframe.attr('src', iframe_src);
-			}
+      iframe.attr('src', iframe_src);
+      e.preventDefault();
     });
-
-    e.preventDefault();
   });
 };
 
@@ -104,7 +99,7 @@ refinery_dialog_success = function(e) {
   close_dialog();
 
   $.ajax({
-    url: window.location.pathname,
+    url: window.location.pathname + window.location.search,
     cache: false,
     success: function(data) {
       $('.pagination_container').html(data);
@@ -657,72 +652,85 @@ var page_options = {
 
 };
 
-var image_dialog = {
-  initialised: false
-  , callback: null
+// TODO:  Need to rewrite WYM to accept multiple images. As it stands, only
+//        the callback is useful when inserting multiple -- helpful for
+//        the page-images and portfolio engines.
 
-  , init: function(callback){
+// ImageDialog
+//
+//   The dialog that opens when choosing to 'Add image' in WYM.
+//
+//   Options:
+//     callback (null):
+//       a function to execute upon chosing 'submit'. Passed either an
+//       an array or a single image, depending on whether `multiple` is
+//       true.
+//     multiple (false):
+//       if true, enables selection of multiple images. Does not allow
+//       insertion into WYM without manual callback manipulation.
+function ImageDialog(options) {
+  self = this;
+  this.defaults = {callback: null, multiple: false};
+  this.settings = $.extend({}, this.defaults, options);
 
-    if (!this.initialised) {
-      this.callback = callback;
-      this.init_tabs();
-      this.init_select();
-      this.init_actions();
-      this.initialised = true;
-    }
-    return this;
-  }
+  this.create = function() {
 
-  , init_tabs: function(){
+    this.callback = this.settings.callback;
+    this.init_tabs();
+    this.init_select();
+    this.init_actions();
+  };
+
+  this.init_tabs = function() {
     var radios = $('#dialog_menu_left input:radio');
     var selected = radios.parent().filter(".selected_radio").find('input:radio').first() || radios.first();
-
-    radios.click(function(){
-      link_dialog.switch_area($(this));
+    radios.click(function() {
+      self.switch_area($(this));
     });
 
     selected.attr('checked', 'true');
-    link_dialog.switch_area(selected);
-  }
+    self.switch_area(selected);
+  };
 
-  , switch_area: function(radio){
+  this.switch_area = function(radio) {
     $('#dialog_menu_left .selected_radio').removeClass('selected_radio');
-    $(radio).parent().addClass('selected_radio');
+    radio.parent().addClass('selected_radio');
     $('#dialog_main .dialog_area').hide();
-    $('#' + radio.value + '_area').show();
-  }
+    $('#' + radio.val() + '_area').show();
+  };
 
-  , init_select: function(){
-    $('#existing_image_area_content ul li img').click(function(){
-        image_dialog.set_image(this);
+  this.init_select = function() {
+    $('#existing_image_area_content ul li img').click(function() {
+      self.toggle_image($(this));
     });
-    //Select any currently selected, just uploaded...
+
+    // Select any currently selected, just uploaded...
     if ((selected_img = $('#existing_image_area_content ul li.selected img')).length > 0) {
-      image_dialog.set_image(selected_img.first());
+      self.toggle_image(selected_img.first());
     }
-  }
+  };
 
-  , set_image: function(img){
-    if ($(img).length > 0) {
-      $('#existing_image_area_content ul li.selected').removeClass('selected');
+  this.toggle_image = function(img) {
+    if (img.length > 0) {
+      if (!self.settings.multiple) $('#existing_image_area_content ul li.selected').removeClass('selected');
 
-      $(img).parent().parent().addClass('selected');
-      var imageId = $(img).attr('data-id');
+      img.parent().toggleClass('selected');
+      var imageId = img.attr('data-id');
       var geometry = $('#existing_image_size_area li.selected a').attr('data-geometry');
       var size = $('#existing_image_size_area li.selected a').attr('data-size');
       var resize = $("#wants_to_resize_image").is(':checked');
 
-      image_url = resize ? $(img).attr('data-' + size) : $(img).attr('data-original');
+      image_url = resize ? img.attr('data-' + size) : img.attr('data-original');
 
       if (parent) {
         if ((wym_src = parent.document.getElementById('wym_src')) != null) {
           wym_src.value = image_url;
         }
         if ((wym_title = parent.document.getElementById('wym_title')) != null) {
-          wym_title.value = $(img).attr('title');
+          wym_title.value = img.attr('title');
         }
         if ((wym_alt = parent.document.getElementById('wym_alt')) != null) {
-          wym_alt.value = $(img).attr('alt');
+          wym_alt.value = img.attr('alt');
         }
         if ((wym_size = parent.document.getElementById('wym_size')) != null
             && typeof(geometry) != 'undefined') {
@@ -730,35 +738,37 @@ var image_dialog = {
         }
       }
     }
-  }
+  };
 
-  , submit_image_choice: function(e) {
+  this.submit_image_choice = function(e) {
     e.preventDefault();
-    if((img_selected = $('#existing_image_area_content ul li.selected img').get(0)) && $.isFunction(this.callback))
+    selected_images = $('#existing_image_area_content ul li.selected img');
+    selected_images = self.settings.multiple ? selected_images.get() : selected_images.get(0);
+
+    if(selected_images && $.isFunction(self.callback))
     {
-      this.callback(img_selected);
+      self.callback(selected_images);
     }
 
     close_dialog(e);
-  }
+  };
 
-  , init_actions: function(){
-    var _this = this;
+  this.init_actions = function() {
     // get submit buttons not inside a wymeditor iframe
     $('#existing_image_area .form-actions-dialog #submit_button')
       .not('.wym_iframe_body #existing_image_area .form-actions-dialog #submit_button')
-      .click($.proxy(_this.submit_image_choice, _this));
+      .click($.proxy(self.submit_image_choice, self));
 
     // get cancel buttons not inside a wymeditor iframe
     $('.form-actions-dialog #cancel_button')
       .not('.wym_iframe_body .form-actions-dialog #cancel_button')
-      .click($.proxy(close_dialog, _this));
+      .click($.proxy(close_dialog, self));
 
     $('#existing_image_size_area ul li a').click(function(e) {
       $('#existing_image_size_area ul li').removeClass('selected');
       $(this).parent().addClass('selected');
       $('#existing_image_size_area #wants_to_resize_image').attr('checked', 'checked');
-      image_dialog.set_image($('#existing_image_area_content ul li.selected img'));
+      self.set_image($('#existing_image_area_content ul li.selected img'));
       e.preventDefault();
     });
 
@@ -767,7 +777,7 @@ var image_dialog = {
         $('#existing_image_size_area ul li:first a').click();
       } else {
         $('#existing_image_size_area ul li').removeClass('selected');
-        image_dialog.set_image($('#existing_image_area_content ul li.selected img'));
+        self.set_image($('#existing_image_area_content ul li.selected img'));
       }
     });
 
@@ -777,130 +787,8 @@ var image_dialog = {
       $(this.document.getElementById('wym_dialog_submit')).click();
     }, parent));
     image_area.find('.form-actions a.close_dialog').click(close_dialog);
-  }
-};
-
-var list_reorder = {
-  initialised: false
-  , init: function() {
-
-    if (!this.initialised) {
-      $('#reorder_action').click(list_reorder.enable_reordering);
-      $('#reorder_action_done').click(list_reorder.disable_reordering);
-      if(list_reorder.tree === false) {
-        list_reorder.sortable_list.find('li').addClass('no-nest');
-      }
-      list_reorder.sortable_list.nestedSortable({
-        listType: 'ul',
-        disableNesting: 'no-nest',
-        forcePlaceholderSize: true,
-        handle: list_reorder.tree ? 'div' : null,
-        items: 'li',
-        opacity: .6,
-        placeholder: 'placeholder',
-        tabSize: 25,
-        tolerance: 'pointer',
-        toleranceElement: list_reorder.tree ? '> div' : null,
-        disabled: true,
-        start: function () {
-        },
-        change: function () {
-          if (list_reorder.tree) {
-            list_reorder.reset_branch_classes(this);
-          }
-        },
-        stop: function () {
-          if (list_reorder.tree) {
-            list_reorder.reset_branch_classes(this);
-            list_reorder.reset_icon_classes(this);
-          } else {
-            list_reorder.reset_on_off_classes(this);
-          }
-        }
-      });
-      if (list_reorder.tree) {
-        list_reorder.reset_branch_classes(list_reorder.sortable_list);
-      } else {
-        list_reorder.reset_on_off_classes(list_reorder.sortable_list);
-      }
-      this.initialised = true;
-    }
-  }
-  , reset_on_off_classes: function(ul) {
-    $("> li", ul).each(function(i, li) {
-      $(li).removeClass('on off on-hover').addClass(i % 2 === 0 ? 'on' : 'off');
-    });
-  }
-
-  , reset_branch_classes: function (ul) {
-    $("li.ui-sortable-helper", this).removeClass("record").removeClass("branch_start").removeClass("branch_end");
-    $("li", ul).removeClass("branch_start").removeClass("branch_end");
-
-    $("> li:first", ul).addClass("branch_start");
-    $("> li:last", ul).addClass("branch_end");
-
-    var nested_ul = $("ul", ul);
-    $("> li:last", nested_ul).addClass("branch_end");
-  }
-
-  , reset_icon_classes: function(ul) {
-    $('li', ul).each(function() {
-      var $li   = $(this);
-      var $icon = $li.find('.icon:first');
-
-      if ($li.find('ul li').size() > 0) {
-        $icon.addClass('toggle expanded');
-      }
-      else if ($icon.hasClass('expanded')){
-        $icon.removeClass('toggle expanded');
-      }
-    });
-  }
-
-  ,enable_reordering: function(e) {
-    if(e) { e.preventDefault(); }
-
-    $('#sortable_list, .sortable_list').addClass("reordering");
-    $('#sortable_list .actions, .sortable_list .actions, #site_bar, header > *:not(script)').fadeTo(500, 0.3);
-    $('#actions *:not("#reorder_action_done, #reorder_action")').not($('#reorder_action_done').parents('li, ul, div')).fadeTo(500, 0.55);
-
-    list_reorder.sortable_list.nestedSortable("enable");
-
-    $('#reorder_action').hide();
-    $('#reorder_action_done').show();
-  }
-
-  , disable_reordering: function(e) {
-    if(e) { e.preventDefault(); }
-
-    if($('#reorder_action_done').hasClass('loading')) { return false; }
-    $('#reorder_action_done').addClass('loading');
-
-    list_reorder.sortable_list.nestedSortable("disable");
-
-    $('#sortable_list, .sortable_list').removeClass("reordering");
-
-    if (list_reorder.update_url !== null) {
-      var serialized = list_reorder.sortable_list.serializelist();
-
-      $.post(list_reorder.update_url, serialized, function(data) {
-        list_reorder.restore_controls(e);
-      });
-    } else {
-      list_reorder.restore_controls(e);
-    }
-  }
-
-  , restore_controls: function(e) {
-    $(list_reorder.sortable_list).removeClass('reordering');
-
-    $('#sortable_list .actions, .sortable_list .actions, #site_bar, header > *:not(script)').fadeTo(250, 1);
-    $('#actions *:not("#reorder_action_done, #reorder_action")').not($('#reorder_action_done').parents('li, ul, div')).fadeTo(250, 1, function() {
-      $('#reorder_action_done').hide().removeClass('loading');
-      $('#reorder_action').show();
-    });
-  }
-};
+  };
+}
 
 var image_picker = {
   initialised: false
@@ -946,10 +834,10 @@ var image_picker = {
   }
 
   , toggle_image: function(e) {
-    $(this.container).find(this.options.image_toggler).html(
-      ($(this.container).find(options.image_toggler).html() == 'Show' ? 'Hide' : 'Show')
+    $(this.container).find(this.picker.options.image_toggler).html(
+      ($(this.container).find(this.picker.options.image_toggler).html() == 'Show' ? 'Hide' : 'Show')
     );
-    $(this.container).find(this.options.image_container).toggle();
+    $(this.container).find(this.picker.options.image_container).toggle();
     e.preventDefault();
   }
 
