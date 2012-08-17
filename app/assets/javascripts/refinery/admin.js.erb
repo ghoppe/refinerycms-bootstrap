@@ -715,7 +715,7 @@ function ImageDialog(options) {
       if (!self.settings.multiple) $('#existing_image_area_content ul li.selected').removeClass('selected');
 
       // Bootstrap change: extra div for thumbnail. Use li parent.
-      img.parent('li').toggleClass('selected');
+      img.closest('li').toggleClass('selected');
       var imageId = img.attr('data-id');
       var geometry = $('#existing_image_size_area li.selected a').attr('data-geometry');
       var size = $('#existing_image_size_area li.selected a').attr('data-size');
@@ -768,7 +768,7 @@ function ImageDialog(options) {
     $('#existing_image_size_area ul li a').click(function(e) {
       $('#existing_image_size_area ul li').removeClass('selected');
       // Important. Parent must be li element.
-      $(this).parent('li').addClass('selected');
+      $(this).closest('li').addClass('selected');
       $('#existing_image_size_area #wants_to_resize_image').attr('checked', 'checked');
       self.set_image($('#existing_image_area_content ul li.selected img'));
       e.preventDefault();
