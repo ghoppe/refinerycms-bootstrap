@@ -52,13 +52,20 @@ GIT
       refinerycms-core (= 2.1.0.dev)
       rspec-rails (~> 2.11)
 
+GIT
+  remote: git://github.com/thomas-mcdonald/bootstrap-sass
+  revision: 433891e27d0ca43db7b6078621149b6c8d51c46c
+  branch: 2.1-wip
+  specs:
+    bootstrap-sass (2.1.0.0)
+
 PATH
   remote: .
   specs:
-    refinerycms-bootstrap (2.0.4)
-      bootstrap-sass (~> 2.0.4.0)
-      refinerycms-core (~> 2.1.0.dev)
-      refinerycms-images (~> 2.1.0.dev)
+    refinerycms-bootstrap (2.1.0.dev)
+      bootstrap-sass (~> 2.1.0.0)
+      refinerycms-core (~> 2.0)
+      refinerycms-images (~> 2.0)
 
 GEM
   remote: http://rubygems.org/
@@ -84,9 +91,6 @@ GEM
       activesupport (= 3.2.6)
       arel (~> 3.0.2)
       tzinfo (~> 0.3.29)
-    activeresource (3.2.6)
-      activemodel (= 3.2.6)
-      activesupport (= 3.2.6)
     activesupport (3.2.6)
       i18n (~> 0.6)
       multi_json (~> 1.0)
@@ -97,7 +101,6 @@ GEM
       activerecord (>= 3.0.0)
     babosa (0.3.7)
     bcrypt-ruby (3.0.1)
-    bootstrap-sass (2.0.4.0)
     builder (3.0.0)
     capybara (1.1.2)
       mime-types (>= 1.16)
@@ -134,9 +137,6 @@ GEM
       railties (>= 3.0.0)
     ffi (1.0.11)
     friendly_id (4.0.7)
-    generator_spec (0.8.5)
-      rails (>= 3.0, < 4.0)
-      rspec-rails
     globalize3 (0.2.0)
       activemodel (>= 3.0.0)
       activerecord (>= 3.0.0)
@@ -167,13 +167,11 @@ GEM
       treetop (~> 1.4.8)
     mime-types (1.19)
     multi_json (1.3.6)
-    mysql2 (0.3.11)
     nokogiri (1.5.5)
     orm_adapter (0.0.7)
     paper_trail (2.6.3)
       activerecord (~> 3.0)
       railties (~> 3.0)
-    pg (0.14.0)
     polyglot (0.3.3)
     rack (1.4.1)
     rack-cache (1.2)
@@ -182,14 +180,6 @@ GEM
       rack
     rack-test (0.6.1)
       rack (>= 1.0)
-    rails (3.2.6)
-      actionmailer (= 3.2.6)
-      actionpack (= 3.2.6)
-      activerecord (= 3.2.6)
-      activeresource (= 3.2.6)
-      activesupport (= 3.2.6)
-      bundler (~> 1.0)
-      railties (= 3.2.6)
     railties (3.2.6)
       actionpack (= 3.2.6)
       activesupport (= 3.2.6)
@@ -257,25 +247,18 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  activerecord-jdbcmysql-adapter
-  activerecord-jdbcpostgresql-adapter
   activerecord-jdbcsqlite3-adapter
-  bootstrap-sass (~> 2.0.4.0)
+  bootstrap-sass!
   coffee-rails
-  factory_girl_rails
-  generator_spec
   growl (~> 1.0.3)
   guard-spork
   jquery-rails
-  jruby-openssl
-  mysql2
-  pg
   rb-fchange (~> 0.0.5)
   rb-fsevent (>= 0.3.9)
   rb-notifu (~> 0.0.4)
-  refinerycms (~> 2.1.0.dev)!
+  refinerycms!
   refinerycms-bootstrap!
-  refinerycms-testing (~> 2.1.0.dev)
+  refinerycms-testing!
   sass-rails
   spork (= 0.9.0.rc9)
   sqlite3

@@ -58,7 +58,7 @@ group :assets do
   gem 'sass-rails'
   gem 'coffee-rails'
   gem 'uglifier'
-  gem 'bootstrap-sass', '~> 2.0.4.0'
+  gem 'bootstrap-sass', git: 'git://github.com/thomas-mcdonald/bootstrap-sass', branch: '2.1-wip'
 end
 
 gem 'jquery-rails'
