@@ -23,8 +23,8 @@ module WillPaginate
       end
       
       def gap
-   			tag :li, link(super, '#'), :class => 'disabled'
- 			end
+   		tag :li, link('&hellip;'.html_safe, '#'), :class => 'disabled success'
+ 	  end
     end
   end
 end
