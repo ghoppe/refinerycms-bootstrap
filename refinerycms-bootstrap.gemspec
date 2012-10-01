@@ -14,5 +14,5 @@ Gem::Specification.new do |s|
   # Runtime dependencies
   s.add_dependency             'refinerycms-core',    '~> 2.0'
   s.add_dependency             'refinerycms-images',  '~> 2.0'
-  s.add_dependency             'bootstrap-sass',      '~> 2.1.0.0'
+  s.add_dependency             'bootstrap-sass',      '~> 2.1.0.1'
 end

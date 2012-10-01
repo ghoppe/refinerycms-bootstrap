@@ -1,22 +1,22 @@
-<% nav_class = "navbar"; nav_class << " navbar-fixed-top" if local_assigns[:fixed].present? %>
+<% nav_class = "navbar"; nav_class << " navbar-fixed-top" if !!local_assigns[:fixed] %>
 <div class="<%= nav_class %>">
   <div class="navbar-inner">
     <div class="container">
-    	<%= link_to Refinery::Core.site_name, refinery.root_path, :class => "brand" if local_assigns[:brand].present?  %>
-    	<% if local_assigns[:responsive].present? %>
+    	<%= link_to Refinery::Core.site_name, refinery.root_path, :class => "brand" unless !local_assigns[:brand]  %>
+    	<% if !!local_assigns[:responsive] %>
     		<a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
     			<span class="icon-bar"></span>
     			<span class="icon-bar"></span>
     			<span class="icon-bar"></span>
     		</a>
     	<% end %>
-    	<% if local_assigns[:responsive].present? %>
+    	<% if !!local_assigns[:responsive] %>
     		<%= render(:partial => "/refinery/bootstrap/menu", :locals => {:divider => :after, :roots => refinery_menu_pages[0..local_assigns[:responsive]] }) %>
     		<div class="nav-collapse">
       		<%= render(:partial => "/refinery/bootstrap/menu", :locals =>  {:divider => :after_except_last, :roots => refinery_menu_pages[local_assigns[:responsive]+1..-1] }) %>
       	</div>
-      <% else %>
-      	<%= render(:partial => "/refinery/bootstrap/menu") %>
+        <% else %>
+      	    <%= render(:partial => "/refinery/bootstrap/menu") %>
     	<% end %>
     </div>
   </div>
