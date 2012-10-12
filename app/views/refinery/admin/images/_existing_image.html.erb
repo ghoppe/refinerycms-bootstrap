@@ -2,7 +2,6 @@
   <%= render '/refinery/admin/search', :url => refinery.insert_admin_images_path(params.dup.except('image')) %>
   <input type='hidden' name='selected_image' id='selected_image' />
   <div id='existing_image_area_content' class='clearfix'>
-ACK.
 <% if @images.any? %>
     <ul class="thumbnails">
       <% @images.each do |image| -%>
