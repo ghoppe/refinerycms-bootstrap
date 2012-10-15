@@ -1,21 +1,4 @@
-<div id='more_options_field'>
-  <p>
-    <%= link_to(raw("<i class=\"icon-cog\"></i> ") << t('.advanced_options') << raw(" <i class=\"icon-chevron-down\"></i> "), "#",
-                :id => 'toggle_advanced_options',
-                :title => t('.toggle_advanced_options'), 
-                :class => "btn") %>
-  </p>
-    
-  <span id='draft_field'>
-    <%= f.check_box :draft %>
-    <%= f.label :draft, t('.save_as_draft'),
-                :class => "stripped" %>
-  </span>
-</div>
-<div id='more_options' class="well" style="display:none;">
-  <div class="hemisquare">
-  <h2><%= t('.page_options') %></h2>
-  <fieldset>
+<%= render '/refinery/admin/form_advanced_options_menu', :f => f %>
 
     <div class="control-group">
       <%= f.label :parent_id, t('.parent_page'), :class => 'control-label' %>        
@@ -25,7 +8,6 @@
         <span class="help-inline"><%= refinery_help_tag t('.parent_page_help') %></span>
       </div>
     </div>
-    
     <% if Refinery::Pages.use_layout_templates %>
       <div class="control-group">
       <%= f.label :layout_template, t('.layout_template'), :class => 'control-label' %>
@@ -36,7 +18,6 @@
       </div>
     </div>
     <% end %>
-    
     <% if Refinery::Pages.use_view_templates %>
       <div class="control-group">
         <%= f.label :view_template, t('.view_template'), :class => 'control-label' %>
@@ -55,7 +36,6 @@
         <span class="help-inline"><%= refinery_help_tag t('.menu_title_help') %></span>
       </div>
     </div>
-    
     <% if Refinery::Pages.use_custom_slugs %>
       <div class="control-group">
       <%= f.label :custom_slug, t('.custom_slug'), :class => 'control-label' %>
@@ -88,9 +68,6 @@
     <% content_for :javascripts do %>
       <script>
         $(document).ready(function(){
-          link_tester.init('<%= refinery.test_url_admin_pages_dialogs_path %>',
-                           '<%= refinery.test_email_admin_pages_dialogs_path %>');
-
           link_tester.validate_url_textbox("#page_link_url")
         });
       </script>
@@ -107,8 +84,6 @@
         <% end %>       
       </div>
     </div>
-      
-  </fieldset>
   </div>
 
   <%= render 'form_advanced_options_seo', :f => f %>
