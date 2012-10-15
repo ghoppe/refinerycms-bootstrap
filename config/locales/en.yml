@@ -18,11 +18,6 @@ en:
             view_live_html: View this bootstrap live <br/><em>(opens in a new window)</em>
             edit: Edit this bootstrap
             delete: Remove this bootstrap forever
-        pages:
-          form_advanced_options:
-            advanced_options: Advanced Options
-            save_as_draft: Save As Draft
-            toggle_advanced_options: Toggle Advanced Options
       bootstrap:
         show:
           other: Other Bootstrap
