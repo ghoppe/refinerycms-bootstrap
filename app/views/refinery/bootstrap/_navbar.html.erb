@@ -1,4 +1,4 @@
-<% nav_class = "navbar"; nav_class << " navbar-#{local_assigns[:display]}" if not local_assigns[:variation].exists? %>
+<% nav_class = "navbar"; nav_class << " navbar-#{local_assigns[:display]}" if not local_assigns[:variation].nil? %>
 <div class="<%= nav_class %>">
   <div class="navbar-inner">
     <div class="container">
