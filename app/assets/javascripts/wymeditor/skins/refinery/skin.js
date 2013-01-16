@@ -34,9 +34,9 @@ WYMeditor.SKINS['refinery'] = {
                  this.toggleClassSelector();
                }, wym));
 
-    // adjust sizing
-//    $(wym._box).css('width', $(wym._element).width() - 2)
-//     .find('.wym_iframe iframe').css('width', $(wym._box).width() - 2);
+    // adjust sizing (refinery-bootstrap: don't adjust)
+    // $(wym._box).css('width', $(wym._element).width() - 2)
+    //   .find('.wym_iframe iframe').css('width', $(wym._box).width() - 2);
 
 		$('.button').corner('6px');
 		$(".wym_area_top li>a").corner("2px");

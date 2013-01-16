@@ -1,0 +1,7 @@
+<section id='records' class='span8 <%= ' one_list' if @recent_activity.empty? or @recent_inquiries.empty? %>'>
+  <%= render 'records' %>
+</section>
+<aside id='actions' class="span3">
+  <h2><%= t('.quick_tasks') %></h2>
+  <%= render 'actions' %>
+</aside>
