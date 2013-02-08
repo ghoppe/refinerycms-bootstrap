@@ -59,7 +59,6 @@ label[for] {
   margin-bottom: 0px;
 }
 #content .field, #content .form-actions {
-  width: 100%;
   position: relative;
 }
 #dialog_container #content .field, .dialog_container .field {
@@ -112,6 +111,9 @@ select.widest {
 }
 #sort-status {
   padding: 5px 5px 5px 0px;
+}
+.hidden {
+  display: none;
 }
 hr {
   border: 0;
@@ -210,7 +212,7 @@ a {
 }
 a:hover {
   color: #000;
-  border-bottom: 1px solid #727272;
+/*  border-bottom: 1px solid #727272; */
 }
 #content .wym_box a, #content .ui-tabs a, #content .pagination a {
   border-bottom: 0px none;
@@ -1235,11 +1237,6 @@ input.button.close_dialog:active, a.button.close_dialog:active, #content a.butto
 }
 .form-actions a.confirm-delete:active, #content .form-actions a.confirm-delete:active {
   background: #bb0000;
-}
-.field input[type=text], .field input[type=password], .field textarea {
-  border: 1px solid #7f9db9;
-  padding: 0.4% 0.5%;
-  line-height: 20px;
 }
 /* ## Advanced Page Options --------------------------------------------- */
 #more_options{
