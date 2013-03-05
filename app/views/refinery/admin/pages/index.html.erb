@@ -1,9 +1,10 @@
-<section id="records" class="span8 tree">
+<div id="records" class="span8 tree">
   <% cache_if(Refinery::Pages.cache_pages_backend, [Refinery::Core.base_cache_key, "pages_backend", Globalize.locale].join('_')) do %>
     <%= render 'records' %>
   <% end %>
-</section>
-<section id="actions" class="span3">
+</div>
+
+<div id="actions" class="span4">
   <%= render 'actions' %>
-</section>
+</div>
 <%= render '/refinery/admin/make_sortable', :tree => true, :replace_contents_after_update => true if @pages.many? -%>

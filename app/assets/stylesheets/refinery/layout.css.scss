@@ -41,9 +41,23 @@ label[for] {
 }
 
 #admin-content {
-    background: white;
-    @include box-sizing(border-box);
-    padding: 1em;
+  background: white;
+  overflow: hidden;
+  #records, #actions {
+    /* Large margin for equal-height columns */
+    padding-top: 10px;
+    padding-left: 20px;
+    padding-right: 20px;
+    margin-bottom: -99979px;
+    padding-bottom: 99999px;
+  }
+  #actions {
+    background: #eeeeee;
+    border-left: 1px solid #ccc;
+    .btn {
+      text-align: left;
+    }
+  }
 }
 
 #page_container, #site_bar_content, header {
@@ -70,44 +84,6 @@ input.widest, textarea.widest {
 }
 select.widest {
   max-width: 99%;
-}
-#actions {
-  padding-left: 15px;
-  padding-top: 0px;
-  ul {
-    margin: 0px 0px 18px 0px;
-    padding: 0;
-    list-style: none;
-    &#current_locale {
-      margin-top: 30px;
-    }
-  }
-  li {
-    margin-bottom: 10px;
-    a {
-      background-color: #dbedff;
-      background-position: 12px;
-      background-repeat: no-repeat;
-      border: 1px solid #65C3F7;
-      display: block;
-      padding: 9px 12px 9px 36px;
-      &:hover {
-        background-color: #cae7fb;
-      }
-      &:active {
-        background-color: #22A7F2;
-        color: white;
-      }
-      img {
-        vertical-align: bottom;
-        border: 0;
-      }
-    }
-    &.selected a {
-      background-color: #22A7F2;
-      color: white;
-    }
-  }
 }
 #sort-status {
   padding: 5px 5px 5px 0px;
@@ -480,10 +456,10 @@ pre {
 #records > ul li, #records > #recent_activity > ul li, #records > #recent_inquiries > ul li,
   #records .pagination_container > ul li, #records .pagination_frame > ul {
   list-style: none;
-  padding: 0px 5px;
+  padding: 6px 5px 2px;
   vertical-align: top;
   margin-bottom: 2px;
-  line-height: 35px;
+  line-height: 22px;
   position: relative;
 }
 #records > #recent_activity > ul li, #records > #recent_inquiries > ul li {
@@ -548,6 +524,9 @@ pre {
   }
   > #recent_inquiries {
     margin-left: 21px;
+  }
+  .btn-toolbar {
+    margin: -3px 0 0 0;
   }
 }
 #pagination ul a:hover, #pagination .on {
@@ -649,9 +628,6 @@ label.stripped {
 #body_field textarea, #side_body_field textarea {
   width: 99%;
 }
-.record .title span {
-  line-height: 30px;
-}
 #records.files .record .title, #dialog_main #resource_file_area .pages_list ul li a.page_link {
   display:inline-block;
   padding-left:24px;
@@ -689,7 +665,6 @@ label.stripped {
   position: absolute;
   right: 0px;
   top: 0px;
-  width: 120px;
   text-align: right;
   display: block;
   line-height: 28px;
@@ -951,14 +926,6 @@ ul#menu.reordering_menu li a {
 }
 .en #search {
   width: 210px;
-}
-.search_form {
-  position: relative;
-  .button, .button-wrapper {
-    position: absolute;
-    right: 0px;
-    top: 0px;
-  }
 }
 .clearfix:after {
   content:".";
