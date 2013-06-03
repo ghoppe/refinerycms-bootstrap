@@ -43,6 +43,9 @@ label[for] {
 #admin-content {
   background: white;
   overflow: hidden;
+  form {
+  	margin: 20px;
+  }
   #records, #actions {
     /* Large margin for equal-height columns */
     padding-top: 10px;
