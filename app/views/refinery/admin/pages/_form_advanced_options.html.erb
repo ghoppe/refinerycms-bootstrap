@@ -20,7 +20,6 @@
       </div>
     </div>
     <% end %>
-    <% if Refinery::Pages.use_view_templates %>
       <div class="control-group">
         <%= f.label :view_template, t('.view_template'), :class => 'control-label' %>
       <div class="controls">
@@ -29,7 +28,6 @@
         <span class="help-inline"><%= refinery_help_tag t('.view_template_help') %></span>
       </div>
     </div>
-    <% end %>
 
     <div class="control-group">
       <%= f.label :menu_title, t('.menu_title'), :class => 'control-label' %>
