@@ -1,2 +1,2 @@
 require 'refinery/bootstrap'
-require 'bootstrap-rails'
+require 'bootstrap-sass'

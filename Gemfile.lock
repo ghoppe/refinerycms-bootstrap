@@ -1,16 +1,7 @@
-GIT
-  remote: git://github.com/anjlab/bootstrap-rails.git
-  revision: 4e239795de0e7038f9f1e17a9e02eab19330012c
-  specs:
-    anjlab-bootstrap-rails (3.0.0.2)
-      railties (>= 3.0)
-      sass (>= 3.2)
-
 PATH
   remote: .
   specs:
     refinerycms-bootstrap (2.1.0.3)
-      anjlab-bootstrap-rails (>= 3.0.0.0)
       refinerycms-core (~> 2.1.0)
       refinerycms-images (~> 2.1.0)
 
@@ -114,5 +105,4 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  anjlab-bootstrap-rails!
   refinerycms-bootstrap!
