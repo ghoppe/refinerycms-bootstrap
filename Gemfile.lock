@@ -10,6 +10,7 @@ PATH
   remote: .
   specs:
     refinerycms-bootstrap (2.1.0.3)
+      anjlab-bootstrap-rails (>= 3.0.0.0)
       refinerycms-core (~> 2.1.0)
       refinerycms-images (~> 2.1.0)
 
