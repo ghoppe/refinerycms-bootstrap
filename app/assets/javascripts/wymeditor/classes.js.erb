@@ -636,9 +636,7 @@ WYMeditor.Lexer.prototype._invokeParser = function(content, is_match)
   }
   var current = this._mode.getCurrent();
   var handler = this._mode_handlers[current];
-  var result;
-  eval('result = this._parser.' + handler + '(content, is_match);');
-  return result;
+  return this._parser[handler](content, is_match);
 };
 
 /**
@@ -1200,8 +1198,7 @@ WYMeditor.XhtmlSaxListener.prototype.getResult = function()
 
 WYMeditor.XhtmlSaxListener.prototype.getTagReplacements = function()
 {
-  // refinery-bootstrap: <b> and <i> tags are used for icons. don't replace.
-  return {};
+  return {'b':'strong', 'i':'em'};
 };
 
 WYMeditor.XhtmlSaxListener.prototype.addContent = function(text)
