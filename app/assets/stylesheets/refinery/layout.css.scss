@@ -1,5 +1,4 @@
 @import "bootstrap";
-@import "bootstrap/theme";
 
 /*==================================
 =     Mixins
@@ -1414,8 +1413,8 @@ a.information:hover {
 }
 
 .thumbnails li.selected div.thumbnail {
-  border-color: $linkColor;
-  background-color: $linkColor;
+  border-color: $link-color;
+  background-color: $link-color;
   @include box-shadow(0 1px 4px rgba(0,105,214,.25));
 }
 

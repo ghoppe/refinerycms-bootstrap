@@ -6,11 +6,11 @@
     </span>
   </span>
   
-  <div class='btn-toolbar pull-right'>
-      <div class="btn-group">
+  <div class='pull-right'>
+      <div class="btn-group btn-group-xs">
       <%= link_to raw('<span class="glyphicon glyphicon-remove"></span>'),
                   refinery.admin_user_path(user),
-                  :class => "btn btn-danger btn-small confirm-delete",
+                  :class => "btn btn-danger btn-default confirm-delete",
                   :title => t('.delete'),
                   :data => {
                     :confirm => t('message',
@@ -20,12 +20,12 @@
                   },
                   :method => :delete if current_refinery_user.can_delete?(user) %>
       <%= mail_to user.email, raw('<span class="glyphicon glyphicon-envelope"></span>'),
-                  :class => "btn btn-small",
+                  :class => "btn btn-default",
                   :target => "_blank",
                   :title => t('.email_user') %>
       <%= link_to raw('<span class="glyphicon glyphicon-edit"></span>'),
                   refinery.edit_admin_user_path(user),
-                  :class => "btn btn-small",
+                  :class => "btn btn-default",
                   :title => t('edit', :scope => 'refinery.admin.users') if current_refinery_user.can_edit?(user) %>
       </div>
   </div> 

@@ -1,4 +1,4 @@
-<div class="btn-group btn-group-vertical btn-block">
+<div class="btn-group-vertical btn-block">
   <% if ::Refinery::Plugins.active.names.include?("refinery_pages") %>
       <%= link_to raw('<span class="glyphicon glyphicon-plus-sign"></span> ') << t('.add_a_new_page'),
                   refinery.new_admin_page_path,

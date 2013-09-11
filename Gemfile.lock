@@ -1,7 +1,16 @@
+GIT
+  remote: git://github.com/thomas-mcdonald/bootstrap-sass.git
+  revision: 53ea52cd57898e1b2ba4e73678f1e2950d66ccd4
+  branch: master
+  specs:
+    bootstrap-sass (3.0.0.0)
+      sass (~> 3.2)
+
 PATH
   remote: .
   specs:
     refinerycms-bootstrap (2.1.0.3)
+      bootstrap-sass (>= 2.2.0, <= 3.0.0.0)
       refinerycms-core (~> 2.1.0)
       refinerycms-images (~> 2.1.0)
 
@@ -105,4 +114,5 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  bootstrap-sass!
   refinerycms-bootstrap!
