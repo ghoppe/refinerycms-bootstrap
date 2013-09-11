@@ -1,21 +1,21 @@
 <div class="btn-group btn-group-vertical btn-block">
   <% if ::Refinery::Plugins.active.names.include?("refinery_pages") %>
-      <%= link_to raw('<i class="icon-plus-sign icon-white"></i> ') << t('.add_a_new_page'),
+      <%= link_to raw('<span class="glyphicon glyphicon-plus-sign"></span> ') << t('.add_a_new_page'),
                   refinery.new_admin_page_path,
                   :class => "btn btn-large btn-info" %>
-      <%= link_to raw('<i class="icon-edit icon-white"></i> ') << t('.update_a_page'),
+      <%= link_to raw('<span class="glyphicon glyphicon-edit"></span> ') << t('.update_a_page'),
                   refinery.admin_pages_path,
                   :class => "btn btn-large btn-info" %>
   <% end %>
   <% if ::Refinery::Plugins.active.names.include?("refinery_files") %>
-      <%= link_to raw('<i class="icon-upload icon-white"></i> ') << t('.upload_a_file'),
+      <%= link_to raw('<span class="glyphicon glyphicon-upload"></span> ') << t('.upload_a_file'),
                   refinery.new_admin_resource_path(:dialog => true,
                                          :width => 600,
                                          :height => 300),
                   :class => "btn btn-large btn-info" %>
   <% end %>
   <% if ::Refinery::Plugins.active.names.include?("refinery_images") %>
-      <%= link_to raw('<i class="icon-picture icon-white"></i> ') << t('.upload_a_image'),
+      <%= link_to raw('<span class="glyphicon glyphicon-picture"></span> ') << t('.upload_a_image'),
                   refinery.new_admin_image_path(:dialog => true,
                                       :width => 600,
                                       :height => 300),

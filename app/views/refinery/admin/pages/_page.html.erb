@@ -22,7 +22,7 @@
 
     <div class='btn-toolbar pull-right'>
       <div class="btn-group">
-      <%= link_to raw('<i class="icon-remove icon-white"></i>'),
+      <%= link_to raw('<span class="glyphicon glyphicon-remove"></span>'),
                   refinery.admin_page_path(page.nested_url),
                   :class => "btn btn-danger btn-small confirm-delete",
                   :title => t('delete', :scope => 'refinery.admin.pages'),
@@ -33,17 +33,17 @@
                     )
                   },
                   :method => :delete if page.deletable? %>
-      <%= link_to raw('<i class="icon-eye-open"></i>'),
+      <%= link_to raw('<span class="glyphicon glyphicon-eye-open"></span>'),
                   page.url,
                   :class => "btn btn-small",
                   :target => "_blank",
                   :title => t('.view_live_html') %>
-      <%= link_to raw('<i class="icon-plus-sign"></i>'),
+      <%= link_to raw('<span class="glyphicon glyphicon-plus"></span>'),
                   refinery.new_admin_page_path(:parent_id => page.id),
                   :class => "btn btn-small",
                   :title => t('new', :scope => 'refinery.admin.pages') %>
 
-      <%= link_to raw('<i class="icon-edit"></i>'),
+      <%= link_to raw('<span class="glyphicon glyphicon-edit"></span>'),
                   refinery.edit_admin_page_path(page.nested_url, :switch_locale => (page.translations.first.locale unless page.translated_to_default_locale?)),
                   :class => "btn btn-small",
                   :title => t('edit', :scope => 'refinery.admin.pages') %>

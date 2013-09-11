@@ -5,7 +5,7 @@
   
   <div class='btn-toolbar pull-right'>
       <div class="btn-group">
-      <%= link_to raw('<i class="icon-remove icon-white"></i>'),
+      <%= link_to raw('<span class="glyphicon glyphicon-remove"></span>'),
                   refinery.admin_image_path(list_view_image),
                   :class => "btn btn-danger btn-small confirm-delete",
                   :title => t('delete', :scope => 'refinery.admin.images'),
@@ -16,12 +16,12 @@
                     )
                   },
                   :method => :delete %>
-      <%= link_to raw('<i class="icon-eye-open"></i>'),
+      <%= link_to raw('<span class="glyphicon glyphicon-eye-open"></span>'),
                   list_view_image.url,
                   :class => "btn btn-small",
                   :target => "_blank",
                   :title => t('view_live_html', :scope => 'refinery.admin.images') %>
-      <%= link_to raw('<i class="icon-edit"></i>'),
+      <%= link_to raw('<span class="glyphicon glyphicon-edit"></span>'),
                   refinery.edit_admin_image_path(list_view_image),
                   :class => "btn btn-small",
                   :title => t('edit', :scope => 'refinery.admin.images') %>

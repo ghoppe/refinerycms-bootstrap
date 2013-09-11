@@ -8,7 +8,7 @@
   
   <div class='btn-toolbar pull-right'>
       <div class="btn-group">
-      <%= link_to raw('<i class="icon-remove icon-white"></i>'),
+      <%= link_to raw('<span class="glyphicon glyphicon-remove"></span>'),
                   refinery.admin_user_path(user),
                   :class => "btn btn-danger btn-small confirm-delete",
                   :title => t('.delete'),
@@ -19,11 +19,11 @@
                     )
                   },
                   :method => :delete if current_refinery_user.can_delete?(user) %>
-      <%= mail_to user.email, raw('<i class="icon-envelope"></i>'),
+      <%= mail_to user.email, raw('<span class="glyphicon glyphicon-envelope"></span>'),
                   :class => "btn btn-small",
                   :target => "_blank",
                   :title => t('.email_user') %>
-      <%= link_to raw('<i class="icon-edit"></i>'),
+      <%= link_to raw('<span class="glyphicon glyphicon-edit"></span>'),
                   refinery.edit_admin_user_path(user),
                   :class => "btn btn-small",
                   :title => t('edit', :scope => 'refinery.admin.users') if current_refinery_user.can_edit?(user) %>
