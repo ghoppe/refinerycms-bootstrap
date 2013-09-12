@@ -1,68 +1,69 @@
-<%= render '/refinery/admin/form_advanced_options_menu', :f => f %>
-
-<div class="row-fluid">
+ <div class="panel-group" id="accordion">
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h4 class="panel-title">
+        <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#advancedOptionsCollapse">
+          Advanced Options
+        </a>
+      </h4>
+    </div>
+    
+<div id="advancedOptionsCollapse" class="panel-collapse collapse container">
+<div class="row">
 <div class="col-md-6">
-    <div class="control-group">
-      <%= f.label :parent_id, t('.parent_page'), :class => 'control-label' %>        
-      <div class="controls">
-        <%= f.select :parent_id, nested_set_options(::Refinery::Page, @page) {|i| "#{'-' * i.level} #{i.title}" },
-                   :include_blank => true %>
-        <span class="help-inline"><%= refinery_help_tag t('.parent_page_help') %></span>
-      </div>
+       
+    <div class="form-group">
+      <%= f.label :parent_id, t('.parent_page') %>  
+      <%= f.select :parent_id, nested_set_options(::Refinery::Page, @page) {|i| "#{'-' * i.level} #{i.title}" }, { :include_blank => true}, { :class => "form-control input-sm" } %>
+      <span class="help-block"><%= t('.parent_page_help') %></span>  
     </div>
+    
     <% if Refinery::Pages.use_layout_templates %>
-      <div class="control-group">
-      <%= f.label :layout_template, t('.layout_template'), :class => 'control-label' %>
-      <div class="controls">
-         <%= f.select :layout_template, @valid_layout_templates,
-                   template_options(:layout_template, @page) %>
-         <span class="help-inline"><%= refinery_help_tag t('.layout_template_help') %></span>
-      </div>
-    </div>
-    <% end %>
-      <div class="control-group">
-        <%= f.label :view_template, t('.view_template'), :class => 'control-label' %>
-      <div class="controls">
-        <%= f.select :view_template, @valid_view_templates.map { |t| [t.titleize, t] },
-                   template_options(:view_template, @page) %>
-        <span class="help-inline"><%= refinery_help_tag t('.view_template_help') %></span>
-      </div>
-    </div>
-
-    <div class="control-group">
-      <%= f.label :menu_title, t('.menu_title'), :class => 'control-label' %>
-      <div class="controls">
-        <%= f.text_field :menu_title, :class => 'span4' %>
-        <span class="help-inline"><%= refinery_help_tag t('.menu_title_help') %></span>
-      </div>
-    </div>
-    <% if Refinery::Pages.use_custom_slugs %>
-      <div class="control-group">
-      <%= f.label :custom_slug, t('.custom_slug'), :class => 'control-label' %>
-      <div class="controls">
-        <%= f.text_field :custom_slug, :class => 'span4' %>
-        <span class="help-inline"><%= refinery_help_tag t('.custom_slug_help') %></span>
+      <div class="form-group">
+        <%= f.label :layout_template, t('.layout_template'), :class => 'control-label' %>
+        <%= f.select :layout_template, @valid_layout_templates, template_options(:layout_template, @page), { :class => "form-control input-sm" } %>
+        <span class="help-block"><%= t('.layout_template_help') %></span>
       </div>
     </div>
     <% end %>
     
-    <div class="control-group">
+    <div class="form-group">
+      <%= f.label :view_template, t('.view_template'), :class => 'control-label' %>
+      <%= f.select :view_template, @valid_view_templates.map { |t| [t.titleize, t] },
+      template_options(:view_template, @page), { :class => "form-control input-sm" } %>
+      <span class="help-block"><%= t('.view_template_help') %></span>
+    </div>
+
+    <div class="form-group">
+      <%= f.label :menu_title, t('.menu_title'), :class => 'control-label' %>
+      <%= f.text_field :menu_title, :class => 'form-control' %>
+      <span class="help-block"><%= t('.menu_title_help') %></span>
+    </div>
+    
+    <% if Refinery::Pages.use_custom_slugs %>
+      <div class="form-group">
+      <%= f.label :custom_slug, t('.custom_slug'), :class => 'control-label' %>
+      <div class="form-control">
+        <%= f.text_field :custom_slug, :class => 'span4' %>
+        <span class="help-block"><%= t('.custom_slug_help') %></span>
+      </div>
+    </div>
+    <% end %>
+    
+    <div class="form-group">
       <%= f.label :skip_to_first_child?, t('.skip_to_first_child') %>
-      <div class="controls">
       <%= f.label :skip_to_first_child, :class => "checkbox" do %>
         <%= f.check_box :skip_to_first_child %>
         <%= t('.skip_to_first_child_label') %>
-        <span class="help-inline"><%= refinery_help_tag t('.skip_to_first_child_help') %></span>
       <% end %>
-      </div>
+      <span class="help-block"><%= t('.skip_to_first_child_help') %></span>
+
     </div>
     
-    <div class="control-group">
+    <div class="form-group">
       <%= f.label :link_url, t('.link_url') %>
-      <div class="controls">
-        <%= f.text_field :link_url, :class => 'span4' %>
-        <span class="help-inline"><%= refinery_help_tag t('.link_url_help') %></span>
-      </div>
+      <%= f.text_field :link_url, :class => 'form-control' %>
+      <span class="help-block"><%= t('.link_url_help') %></span>
     </div>
       
     <% content_for :javascripts do %>
@@ -73,18 +74,17 @@
       </script>
     <% end %>
     
-    <div class="control-group">
+    <div class="form-group">
         <%= f.label :show_in_menu, t('.show_in_menu_title'),
                     :id => 'page_show_in_menu_heading' %>
-      <div class="controls">
         <%= f.label :show_in_menu, :class => "checkbox" do %>
           <%= f.check_box :show_in_menu %>
           <%= t('.show_in_menu_description') %>
-          <span class="help-inline"><%= refinery_help_tag t('.show_in_menu_help') %></span>
-        <% end %>       
-      </div>
+        <% end %> 
+        <span class="help-block"><%= t('.show_in_menu_help') %></span>     
     </div>
   </div>  
   <%= render 'form_advanced_options_seo', :f => f %>
+</div>
 </div>
 </div>

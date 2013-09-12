@@ -1,23 +1,22 @@
-<%= form_for [refinery, :admin, @page],
-             :url => (refinery.admin_page_path(@page.nested_url) if @page.persisted?) do |f| %>
+<%= form_for [refinery, :admin, @page], :url => (refinery.admin_page_path(@page.nested_url) if @page.persisted?) do |f| %>
 
   <%= render '/refinery/admin/error_messages', :object => @page, :include_object_name => true %>
 
   <%= render '/refinery/admin/locale_picker', :current_locale => Globalize.locale %>
 
-  <div class="control-group">
+  <div class="form-group">
     <%= f.label :title, :class => "control-label" %>
-    <div class="controls">
-        <%= f.text_field :title, :class => "span8" %>
-    </div>
+    <%= f.text_field :title, :class => "form-control" %>
   </div>
 
   <%= render 'form_fields_after_title', :f => f %>
 
+  <%= render '/refinery/admin/form_advanced_options_menu', :f => f %>
+
   <div class='field'>
     <%= render 'form_page_parts', :f => f %>
   </div>
-
+  <br>
   <%= render 'form_advanced_options', :f => f %>
 
   <%= render '/refinery/admin/form_actions', :f => f,

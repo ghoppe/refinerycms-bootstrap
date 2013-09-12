@@ -1,6 +1,6 @@
 <%= render '/refinery/admin/search', :url => refinery.admin_images_path %>
     <% icon_lookup = {:list => "list", :grid => "th-large"} %>
-<div class="btn-group-vertical btn-block">
+<div class="btn-group-vertical btn-group-lg btn-block">
     <%= link_to raw('<span class="glyphicon glyphicon-upload"></span> ') << t('.create_new_image'), refinery.new_admin_image_path(:dialog => true),
                 :class => "btn btn-large btn-info" %>
     <% other_image_views.each do |image_view| %>

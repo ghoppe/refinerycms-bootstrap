@@ -2,23 +2,23 @@
 
   <%= render '/refinery/admin/error_messages', :object => @user, :include_object_name => true %>
 
-  <div class='control-group'>
+  <div class='form-group'>
     <%= f.label :username, :class => 'control-label'  %>
-    <div class="controls">
+    <div class="form-control">
         <%= f.text_field :username %>
     </div>
   </div>
   
-  <div class='control-group'>
+  <div class='form-group'>
     <%= f.label :email, :class => 'control-label'  %>
-    <div class="controls">
+    <div class="form-control">
         <%= f.text_field :email %>
     </div>
   </div>
   
-  <div class='control-group'>
+  <div class='form-group'>
     <%= f.label :password, :class => 'control-label'  %>
-    <div class="controls">
+    <div class="form-control">
         <%= f.password_field :password, :autocomplete => 'off' %>
         <% if @user.persisted? %>
             <span class="help-inline"><%= t('.blank_password_keeps_current')%></span>
@@ -26,19 +26,19 @@
     </div>
   </div>
   
-  <div class='control-group'>
+  <div class='form-group'>
     <%= f.label :password_confirmation, :class => 'control-label'  %>
-    <div class="controls">
+    <div class="form-control">
         <%= f.password_field :password_confirmation, :autocomplete => 'off' %>
     </div>
   </div>
   
-  <div class="control-group">
+  <div class="form-group">
       <%= f.label :plugin_access, :class => "control-label" do %>
          <%= t('.plugin_access') %><br>
          <%= link_to "#{t('.enable_all')}", "", :class => "btn btn-mini", :id => "user_plugins_enable_all" %>
       <% end %>
-    <div class="controls">
+    <div class="form-control">
       <% @available_plugins.each do |plugin| -%>
         <% if Refinery::Plugins.always_allowed.names.include?(plugin[:name]) or
               (plugin[:name] == 'refinery_users' and @user.id == current_refinery_user.id) %>
@@ -57,9 +57,9 @@
   </div>
 
   <% if current_refinery_user.has_role?(:superuser) and Refinery::Authentication.superuser_can_assign_roles %>
-    <div class='control-group'>
+    <div class='form-group'>
         <%= f.label :role_access, t('.role_access'), :class => "control-label" %>
-      <div class="controls">
+      <div class="form-control">
         <% @available_roles.each do |role|
           downcased_title = (title = role[:title]).downcase -%>
 
