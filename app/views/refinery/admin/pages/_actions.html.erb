@@ -1,14 +1,14 @@
 <%= render '/refinery/admin/search', :url => refinery.admin_pages_path %>
 <div class="btn-group-vertical btn-group-lg btn-block">
     <%= link_to raw('<span class="glyphicon glyphicon-plus"></span>&nbsp; ') << t('.create_new_page'), refinery.new_admin_page_path,
-                :class => "btn btn-large btn-info" %>
+                :class => "btn btn-lg btn-info" %>
 <% if @pages.many? and !searching? %>
     <%= link_to raw('<span class="glyphicon glyphicon-random"></span>&nbsp; ') << t('.reorder_pages_done'), refinery.admin_pages_path,
                 :id => "reorder_action_done",
                 :style => "display: none;",
-                :class => "btn btn-large btn-success" %>
+                :class => "btn btn-lg btn-success" %>
     <%= link_to raw('<span class="glyphicon glyphicon-random"></span>&nbsp; ') << t('.reorder_pages'), refinery.admin_pages_path,
                 :id => "reorder_action",
-                :class => "btn btn-large btn-info" %>
+                :class => "btn btn-lg btn-info" %>
 <% end %>
 </div>

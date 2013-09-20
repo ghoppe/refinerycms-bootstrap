@@ -42,7 +42,7 @@
     <%= submit_tag submit_button_text,
                    :id => submit_button_id,
                    :name => nil,
-                   :class => "btn btn-large btn-primary wymupdate",
+                   :class => "btn btn-lg btn-primary wymupdate",
                    :tooltip => submit_button_title unless hide_submit %>
 
     <%= render '/refinery/admin/continue_editing', :f => f if continue_editing -%>
@@ -53,7 +53,7 @@
     <%= link_to(cancel_button_text, cancel_url,
                 :title => cancel_title,
                 :id => cancel_button_id,
-                :class => "close_dialog btn btn-large") unless hide_cancel %>
+                :class => "close_dialog btn btn-lg") unless hide_cancel %>
 
     <%= local_assigns[:after_cancel_button] -%>
 
@@ -65,7 +65,7 @@
                 :data => {
                   :confirm => delete_confirmation
                 },
-                :class => "btn btn-large btn-danger pull-right") unless hide_delete %>
+                :class => "btn btn-lg btn-danger pull-right") unless hide_delete %>
     <%= local_assigns[:after_delete_button] -%>
 
 </div>

@@ -1416,8 +1416,8 @@ a.information:hover {
 }
 
 .thumbnails li.selected div.thumbnail {
-  border-color: $link-color;
-  background-color: $link-color;
+ /* border-color: $link-color;
+  background-color: $link-color;*/
   @include box-shadow(0 1px 4px rgba(0,105,214,.25));
 }
 
