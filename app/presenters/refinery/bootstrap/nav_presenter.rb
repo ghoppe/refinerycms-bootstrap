@@ -4,7 +4,7 @@ module Refinery
 
     config_accessor :nav_style
     self.nav_style = :pills
-    self.justified = false
+    # self.justified = false
 
     self.css = 'nav'
     self.css += ' nav-pills'    if nav_style.in?([:pills,:stacked])
