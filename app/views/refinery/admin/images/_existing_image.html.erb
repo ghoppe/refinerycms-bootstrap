@@ -2,24 +2,26 @@
   <%= render '/refinery/admin/search', :url => refinery.insert_admin_images_path(params.dup.except('image')) %>
   <input type='hidden' name='selected_image' id='selected_image' />
   <div id='existing_image_area_content' class='clearfix'>
-<% if @images.any? %>
-    <ul class="thumbnails">
-      <% @images.each do |image| -%>
-        <li<%= ' class="selected"' if @image_id == image.id %>>
-          <div class="thumbnail">
-          <%= image_fu(image, '88x88#c', {
+    
+    <% if @images.any? %>
+      <% @images.each_with_index do |image, i| -%>
+        
+        <%= raw('<div class="row">') if i%6 == 0 -%>
+        <div class="col-sm-2">
+          <a class="thumbnail<%#= ' selected' if @image_id == image.id %>">
+          <%= image_fu(image, '120x120#c', {
                          :alt => image.title,
                          :title => image.title,
                          :id => "image_#{image.id}",
                          :'data-id' => image.id
                        }.merge(thumbnail_urls(image))) -%>
-          </div>
-        </li>
+          </a>
+        </div>
+        <%= raw('</div>') if i%6 == 5 or i == @images.count - 1 %>
       <% end -%>
-    </ul>
-<% elsif searching? %>
-    <%= t('no_results', :scope => 'refinery.admin.search') %>
-<% end %>
+    <% elsif searching? %>
+      <%= t('no_results', :scope => 'refinery.admin.search') %>
+    <% end %>
   </div>
 
   <%= will_paginate @images, :params => params.dup %>

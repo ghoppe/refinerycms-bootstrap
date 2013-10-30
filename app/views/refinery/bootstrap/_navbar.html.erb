@@ -1,2 +1,1 @@
-<%#= link_to Refinery::Core.site_name, refinery.root_path, :class => "brand" unless !local_assigns[:brand]  %>
-<%= Refinery::Bootstrap::BootstrapMenuPresenter.new(refinery_menu_pages, self).to_html %>
+<%= Refinery::Bootstrap::BootstrapNavbarPresenter.new(refinery_menu_pages, self).to_html %>

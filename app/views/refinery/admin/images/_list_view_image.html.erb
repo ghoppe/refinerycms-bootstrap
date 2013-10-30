@@ -3,11 +3,10 @@
     <%= list_view_image.title %> <span class="preview">&nbsp;</span>
   </span>
   
-  <div class='btn-toolbar pull-right'>
-      <div class="btn-group">
+  <div class='btn-group btn-group-xs pull-right'>
       <%= link_to raw('<span class="glyphicon glyphicon-remove"></span>'),
                   refinery.admin_image_path(list_view_image),
-                  :class => "btn btn-danger btn-small confirm-delete",
+                  :class => "btn btn-danger confirm-delete",
                   :title => t('delete', :scope => 'refinery.admin.images'),
                   :data => {
                     :confirm => t('message',
@@ -18,13 +17,12 @@
                   :method => :delete %>
       <%= link_to raw('<span class="glyphicon glyphicon-eye-open"></span>'),
                   list_view_image.url,
-                  :class => "btn btn-small",
+                  :class => "btn btn-default",
                   :target => "_blank",
                   :title => t('view_live_html', :scope => 'refinery.admin.images') %>
       <%= link_to raw('<span class="glyphicon glyphicon-edit"></span>'),
                   refinery.edit_admin_image_path(list_view_image),
-                  :class => "btn btn-small",
+                  :class => "btn btn-default",
                   :title => t('edit', :scope => 'refinery.admin.images') %>
-      </div>
   </div> 
 </li>

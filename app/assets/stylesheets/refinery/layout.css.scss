@@ -207,7 +207,7 @@ a:hover {
 #content {
   padding: 0px;
   a {
-    border-bottom: 1px dotted #727272;
+    /* border-bottom: 1px dotted #727272; */
     &.locale {
       border-bottom: 0;
     }
@@ -460,12 +460,10 @@ pre {
   margin-left: 0;
   padding-left: 0;
 }
-#records > ul li, #records > #recent_activity > ul li, #records > #recent_inquiries > ul li,
-  #records .pagination_container > ul li, #records .pagination_frame > ul {
+#records > ul li, #records > #recent_activity > ul li, #records > #recent_inquiries > ul li, #records .pagination_container > ul li, #records .pagination_frame > ul li {
   list-style: none;
-  padding: 6px 5px 2px;
+  padding: 4px;
   vertical-align: top;
-  margin-bottom: 2px;
   line-height: 22px;
   position: relative;
 }
@@ -517,13 +515,14 @@ pre {
     background-color: #EAEAEA;
   }
   .off, .on-hover {
-    background-color: white;
+    background-color: #F9F9F9;
   }
   ul.empty {
     display: none;
   }
   ul#sortable_list, ul.sortable_list {
     margin-top: 6px;
+    border: 1px solid #ccc;
   }
   > #recent_activity, > #recent_inquiries {
     float: left;
@@ -544,8 +543,14 @@ pre {
 }
 #records.tree ul li, .tree ul li {
   margin: 0px;
-  padding: 4px 0 0 40px;
+  padding: 4px 4px 0 40px;
   background: image_url('refinery/branch.gif') no-repeat 15px 0px;
+}
+#records.tree ul li li, .tree ul li li {
+  padding-right: 0px;
+}
+#records.tree ul, .tree ul {
+  padding-bottom: 6px;
 }
 #records.tree li.record ul {
   margin-left: 0;
@@ -805,6 +810,7 @@ body.dialog form {
     float: left;
     margin-left: 130px;
     min-height: 405px;
+    margin-bottom: 105px;
     width: 696px;
   }
   span.radio {
@@ -1053,6 +1059,7 @@ a#toggle_advanced_options {
   border-right: 0px;
   border-left: 0px;
   border-bottom: 0px;
+  margin-bottom: 0px;
   width: auto;
 }
 #dialog_container.dialog.iframed #content .form-actions {
@@ -1066,6 +1073,9 @@ body.dialog #content .search_form {
 }
 #existing_image_area {
   padding-top:6px;
+  .row {
+    margin-top: 20px;
+  }
 }
 .ui-dialog div.field {
   margin: 0px 10px;
@@ -1074,24 +1084,20 @@ body.dialog #content .search_form {
   padding: 12px;
 }
 ul#image_grid, .pagination_container > ul#image_grid {
-  width: 100%;
   padding: 0px;
-  margin: 10px 0px 15px 0px;
 }
 .pagination_container > ul#image_grid.pagination_frame {
   top: 38px;
 }
 ul#image_grid li, .pagination_container > ul#image_grid li {
-  position: relative;
+  width: 20%;
   float: left;
-  margin: 0px 7px 12px 0px;
-  padding: 0px;
-  width: 124px;
-  text-align: center;
-  height: 165px;
-  overflow: hidden;
-  max-width: 124px;
-  max-height: 165px;
+  padding: 5px;
+  margin: 0 -1px -1px 0;
+  border: 1px solid #ddd;
+  .btn-group {
+    margin-top: 4px;
+  }
 }
 ul#image_grid li.image_4 {
   margin-left: 1px;
@@ -1101,21 +1107,12 @@ ul#image_grid li.image_4 {
   top: auto;
   bottom: 0px;
 }
-#records ul#image_grid li .actions a {
-  line-height: 24px;
-}
 ul#image_grid li.row-end {
   margin-right: 0px;
   float: right;
 }
-ul#image_grid li a {
-  border: 0 none;
-}
 ul#image_grid li p {
   margin: 3px 0;
-}
-ul#image_grid li span.actions {
-  width: 100%;
 }
 ul.checkboxes {
   margin: 0px;
@@ -1419,10 +1416,10 @@ a.information:hover {
     font-size: 18px;
 }
 
-.thumbnails li.selected div.thumbnail {
- /* border-color: $link-color;
-  background-color: $link-color;*/
-  @include box-shadow(0 1px 4px rgba(0,105,214,.25));
+a.thumbnail.selected {
+  border-color: $link-color;
+  background-color: lighten($link-color,20%);
+  @include box-shadow(lighten($link-color,20%) 2px 3px 6px);
 }
 
 /* Internet Explorer to follow: */
