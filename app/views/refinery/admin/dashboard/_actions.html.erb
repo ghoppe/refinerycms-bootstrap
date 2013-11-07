@@ -1,21 +1,21 @@
 <div class="btn-group-vertical btn-group-lg btn-block">
   <% if ::Refinery::Plugins.active.names.include?("refinery_pages") %>
-      <%= link_to raw('<span class="glyphicon glyphicon-plus-sign"></span> ') << t('.add_a_new_page'),
+      <%= link_to raw('<span class="glyphicon glyphicon-file"></span>&nbsp; ') << t('.add_a_new_page'),
                   refinery.new_admin_page_path,
                   :class => "btn btn-lg btn-info" %>
-      <%= link_to raw('<span class="glyphicon glyphicon-edit"></span> ') << t('.update_a_page'),
+      <%= link_to raw('<span class="glyphicon glyphicon-edit"></span>&nbsp; ') << t('.update_a_page'),
                   refinery.admin_pages_path,
                   :class => "btn btn-lg btn-info" %>
   <% end %>
   <% if ::Refinery::Plugins.active.names.include?("refinery_files") %>
-      <%= link_to raw('<span class="glyphicon glyphicon-upload"></span> ') << t('.upload_a_file'),
+      <%= link_to raw('<span class="glyphicon glyphicon-upload"></span>&nbsp; ') << t('.upload_a_file'),
                   refinery.new_admin_resource_path(:dialog => true,
                                          :width => 600,
                                          :height => 300),
                   :class => "btn btn-lg btn-info" %>
   <% end %>
   <% if ::Refinery::Plugins.active.names.include?("refinery_images") %>
-      <%= link_to raw('<span class="glyphicon glyphicon-picture"></span> ') << t('.upload_a_image'),
+      <%= link_to raw('<span class="glyphicon glyphicon-picture"></span>&nbsp; ') << t('.upload_a_image'),
                   refinery.new_admin_image_path(:dialog => true,
                                       :width => 600,
                                       :height => 300),
@@ -26,23 +26,19 @@
     <% locales = Refinery::I18n.locales.clone %>
     <% current_locale = ::I18n.locale %>
     <% current_locale_title = locales.delete(current_locale) %>
-    <ul id='current_locale'>
-      <li>
-        <%= link_to "#", :style => "background-image: url('#{asset_path "refinery/icons/flags/#{current_locale}.png"}');" do %>
-          <%= current_locale_title.respond_to?(:force_encoding) ? current_locale_title.force_encoding('utf-8') : current_locale_title %>
-          <span><%= t('.change_language') %></span>
-          <span style='display:none;'><%= t('cancel', :scope => 'refinery.admin.form_actions') %></span>
-        <% end %>
-      </li>
-    </ul>
-    <ul id='other_locales' style='display: none'>
-      <% locales.sort_by{|key, value| value}.each do |locale, locale_title| %>
-        <li>
-          <%= link_to locale_title.respond_to?(:force_encoding) ? locale_title.force_encoding('utf-8') : locale_title,
-                      refinery.admin_dashboard_path(:set_locale => locale),
-                      :style => "background-image: url('#{asset_path "refinery/icons/flags/#{locale}.png"}');" %>
-        </li>
-      <% end %>
-    </ul>
-
 </div>
+<div class="btn-group btn-group-lg btn-block">	
+  <button type="button" class="btn btn-lg btn-block btn-info dropdown-toggle" data-toggle="dropdown">
+  	<span class="glyphicon glyphicon-globe"></span>&nbsp; <%= t('.change_language') %> <span class="caret"></span> <span class="label label-info pull-right"><%= image_tag asset_path("refinery/icons/flags/#{current_locale}.png") -%> <%= current_locale %></span>
+  </button>
+  <ul class="dropdown-menu" role="menu">
+    <% locales.sort_by{|key, value| value}.each do |locale, locale_title| %>
+      <li>
+		<% locale_title_enc = locale_title.respond_to?(:force_encoding) ? locale_title.force_encoding('utf-8') : locale_title %>
+		<% img_tag_raw = image_tag(asset_path("refinery/icons/flags/#{locale}.png"), :class => "pull-right") %>
+        <%= link_to "#{locale_title_enc} #{img_tag_raw}".html_safe, refinery.admin_dashboard_path(:set_locale => locale) %>
+      </li>
+    <% end %>
+  </ul>
+</div>
+  

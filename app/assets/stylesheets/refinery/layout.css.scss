@@ -1,5 +1,3 @@
-@import "bootstrap";
-
 /*==================================
 =     Mixins
 ==================================*/
@@ -42,21 +40,20 @@ label[for] {
 
 #admin-content {
   background: white;
-  overflow: hidden;
   form {
   	margin: 20px;
   }
-  #records, #actions {
-    /* Large margin for equal-height columns */
+ /*   #records, #actions {
+   Large margin for equal-height columns
     padding-top: 10px;
     padding-left: 20px;
     padding-right: 20px;
     margin-bottom: -99979px;
     padding-bottom: 99999px;
-  }
+  } */
   #actions {
-    background: #eeeeee;
-    border-left: 1px solid #ccc;
+	  .well{margin-top: 20px;}
+	 h3 { margin-top: 0;}
     .btn {
       text-align: left;
     }
@@ -462,7 +459,6 @@ pre {
 }
 #records > ul li, #records > #recent_activity > ul li, #records > #recent_inquiries > ul li, #records .pagination_container > ul li, #records .pagination_frame > ul li {
   list-style: none;
-  padding: 4px;
   vertical-align: top;
   line-height: 22px;
   position: relative;
