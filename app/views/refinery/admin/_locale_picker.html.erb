@@ -1,0 +1,14 @@
+<input type="hidden" name="switch_locale" id="switch_locale" value="<%= local_assigns[:current_locale] %>" />
+<button class="btn btn-info dropdown-toggle" data-toggle="dropdown">
+	 <%= local_assigns[:current_locale] %><span class="caret"></span>
+</button>
+<% if Refinery::I18n.frontend_locales.many? %>
+  <ul class="dropdown-menu" role="menu">
+    <% Refinery::I18n.frontend_locales.each do |locale| %>
+      <li<%= %Q{ class=selected} if locale.to_s == local_assigns[:current_locale].to_s %>>
+        <%= link_to refinery_icon_tag(%Q{flags/#{locale}.png}, :size => '32x22'),
+                    refinery.url_for(:switch_locale => locale) %>
+      </li>
+    <% end %>
+  </ul>
+<% end %>
