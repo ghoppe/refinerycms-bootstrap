@@ -35,7 +35,7 @@
     <% locales.sort_by{|key, value| value}.each do |locale, locale_title| %>
       <li>
 		<% locale_title_enc = locale_title.respond_to?(:force_encoding) ? locale_title.force_encoding('utf-8') : locale_title %>
-		<% img_tag_raw = image_tag(asset_path("refinery/icons/flags/#{locale}.png"), :class => "pull-right") %>
+		<% img_tag_raw = image_tag(asset_path("refinery/icons/flags/#{locale}.png")) %>
         <%= link_to "#{locale_title_enc} #{img_tag_raw}".html_safe, refinery.admin_dashboard_path(:set_locale => locale) %>
       </li>
     <% end %>

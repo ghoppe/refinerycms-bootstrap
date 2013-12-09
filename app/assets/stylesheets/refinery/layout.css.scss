@@ -1,3 +1,5 @@
+$link-color: #428bca;
+
 /*==================================
 =     Mixins
 ==================================*/
@@ -40,7 +42,7 @@ label[for] {
 
 #admin-content {
   background: white;
-  form {
+  form, .pagination_container {
   	margin: 20px;
   }
  /*   #records, #actions {
@@ -51,17 +53,29 @@ label[for] {
     margin-bottom: -99979px;
     padding-bottom: 99999px;
   } */
+  #records { padding-top: 20px; }
   #actions {
-	  .well{margin-top: 20px;}
+	  padding-bottom: 20px;
+	.well {margin-top: 20px;}
 	 h3 { margin-top: 0;}
     .btn {
       text-align: left;
+	  .label {
+		 img { vertical-align: baseline;}
+	  }
+    }
+    .dropdown-menu {
+	  img {
+        float: right !important;
+		margin-top: 4px;
+		margin-left: 8px;
+	  }
     }
   }
 }
 
 .form-actions {
-	margin-top: 20px;
+  margin-top: 20px;
 }
 
 #page_container, #site_bar_content, header {
@@ -1413,7 +1427,7 @@ a.information:hover {
 a.thumbnail.selected {
   border-color: $link-color;
   background-color: lighten($link-color,20%);
-  @include box-shadow(lighten($link-color,20%) 2px 3px 6px);
+  // @include box-shadow(lighten($link-color,20%) 2px 3px 6px);
 }
 
 /* Internet Explorer to follow: */
