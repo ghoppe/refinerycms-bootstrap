@@ -23,7 +23,7 @@ module Refinery
         
         def render_collapse_menu_items(items)
           content_tag(:div, :class => "collapse navbar-collapse navbar-#{dom_id}-collapse") do
-            render_menu_items(items)
+            render_menu_items(items, list_tag_css)
           end
         end
  

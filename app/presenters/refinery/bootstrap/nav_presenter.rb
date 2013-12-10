@@ -33,11 +33,11 @@ module Refinery
         content_tag(list_item_tag, :class => menu_item_css(menu_item, index)) do
           buffer = ActiveSupport::SafeBuffer.new
           if menu_item_children(menu_item).present?
-            buffer << link_to("#{menu_item.title} <b class=\"caret\"></b>", context.refinery.url_for(menu_item.url), :class => 'dropdown-toggle', 'data-toggle' => 'dropdown')
+            buffer link_to(raw("#{menu_item.title} <span class=\"glyphicon glyphicon-chevron-down\"></span>"), context.refinery.url_for(menu_item.url), :class => 'dropdown-toggle', 'data-toggle' => 'dropdown')
             buffer << render_menu_items(menu_item_children(menu_item), 'dropdown-menu')
-        else
+          else
             buffer << link_to(menu_item.title, context.refinery.url_for(menu_item.url))
-        end
+          end
           buffer
         end
       end
