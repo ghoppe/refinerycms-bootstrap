@@ -1,0 +1,21 @@
+<%= render "/refinery/admin/search", :url => request.path.gsub("//", "/") %>
+
+ <div class="btn-group-vertical btn-group-lg btn-block">
+
+     <%= link_to raw('<span class="glyphicon glyphicon-inbox"></span>&nbsp; ') << t('.inbox'), refinery.inquiries_admin_inquiries_path, 
+     	  :class => "btn btn-large btn-info" %>
+   
+     <% if @spam_count > 0  %>
+       <%= link_to raw('<span class="glyphicon glyphicon-inbox"></span>&nbsp; ') << "#{t('.spam')} <span class=\"badge\">#{@spam_count}</span>", refinery.spam_inquiries_admin_inquiries_path, :class => "btn btn-large btn-info" %>
+     <% else %>
+       <%= link_to raw('<span class="glyphicon glyphicon-inbox"></span>&nbsp; ') << t('.spam'), refinery.spam_inquiries_admin_inquiries_path, :class => "btn btn-large btn-info" %>
+     <% end %>
+
+     <%= link_to t('.update_notified'), refinery.edit_inquiries_admin_setting_path(:inquiry_notification_recipients, :dialog => true, :height => 300),
+                   :class => "btn btn-large btn-info" %>
+     <%= link_to t('.edit_confirmation_email'),
+                 refinery.edit_inquiries_admin_setting_path(:inquiry_confirmation_body, :dialog => true),
+                 :class => "btn btn-large btn-info" %>
+
+ </div>
+ 

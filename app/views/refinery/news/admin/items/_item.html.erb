@@ -1,0 +1,44 @@
+<li class='clearfix record <%= cycle("on", "on-hover") %>'>
+  <span class='title'>
+    <%= item.title %>
+    <span class="preview">
+      <%= t('.published') %> <%= l(item.publish_date, :format => :short) %>
+    </span>
+    <% if Refinery::I18n.frontend_locales.many? and
+          (locales = item.translations.collect{|t| t.locale}).present? %>
+      <span class='preview'>
+        <% locales.each do |locale| %>
+          <%= link_to refinery_icon_tag("flags/#{locale}.png", :size => '16x11'), refinery.edit_news_admin_item_path(item, :switch_locale => locale),
+                      :class => "locale" %>
+        <% end %>
+      </span>
+    <% end %>
+  </span>
+  
+    <div class='pull-right'>
+      <div class="btn-group btn-group-xs">
+      <%= link_to raw('<span class="glyphicon glyphicon-remove"></span>'),
+                  refinery.news_admin_item_path(item),
+                  :class => "btn btn-danger btn-default confirm-delete",
+                  :title => t('delete'),
+                  :data => {
+                    :confirm => t('refinery.admin.delete.message',
+                      :scope => 'refinery.admin.delete',
+                      :title =>  item.title
+                    )
+                  },
+                  :method => :delete %>
+      <%= link_to raw('<span class="glyphicon glyphicon-eye-open"></span>'),
+                  refinery.news_item_path(item),
+                  :class => "btn btn-default",
+                  :target => "_blank",
+                  :title => t('.view_live_html') %>
+      <%= link_to raw('<span class="glyphicon glyphicon-edit"></span>'),
+                  refinery.edit_news_admin_item_path(item),
+                  :class => "btn btn-default",
+                  :title => t('edit') %>
+      </div>
+    </div>
+
+  
+</li>

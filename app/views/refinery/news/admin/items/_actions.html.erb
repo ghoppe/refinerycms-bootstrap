@@ -1,0 +1,4 @@
+  <%= render '/refinery/admin/search', :url => refinery.news_admin_items_path %>
+  <div class="btn-group-vertical btn-group-lg btn-block">
+    <%= link_to raw('<span class="glyphicon glyphicon-plus"></span>&nbsp; ') << t('.create'), refinery.new_news_admin_item_path, :class => "btn btn-large btn-info" %>
+  </div>
