@@ -1,59 +1,63 @@
-<%= form_for [refinery, :admin, @user], :html => { :class => "form-horizontal" } do |f| %>
+<%= form_for [refinery, :admin, @user], :html => { :class => "form-horizontal records" } do |f| %>
 
   <%= render '/refinery/admin/error_messages', :object => @user, :include_object_name => true %>
 
   <div class='form-group'>
-    <%= f.label :username, :class => 'control-label'  %>
-    <div class="form-control">
-        <%= f.text_field :username %>
-    </div>
+    <%= f.label :username, :class => 'control-label col-md-2'  %>
+	<div class="col-sm-6">
+    	<%= f.text_field :username, :class => 'form-control' %>
+	</div>
   </div>
   
   <div class='form-group'>
-    <%= f.label :email, :class => 'control-label'  %>
-    <div class="form-control">
-        <%= f.text_field :email %>
-    </div>
+    <%= f.label :email, :class => 'control-label col-md-2'  %>
+	<div class="col-sm-6">
+    	<%= f.text_field :email, :class => 'form-control' %>
+	</div>
   </div>
   
   <div class='form-group'>
-    <%= f.label :password, :class => 'control-label'  %>
-    <div class="form-control">
-        <%= f.password_field :password, :autocomplete => 'off' %>
-        <% if @user.persisted? %>
-            <span class="help-inline"><%= t('.blank_password_keeps_current')%></span>
-        <% end %>        
-    </div>
+    <%= f.label :password, :class => 'control-label col-md-2'  %>
+	<div class="col-sm-6">
+    	<%= f.password_field :password, :autocomplete => 'off', :class => 'form-control' %>
+	</div>
+	<div class="col-sm-4">
+    <% if @user.persisted? %>
+       <span class="help-inline"><%= t('.blank_password_keeps_current')%></span>
+    <% end %>        
+	</div>
   </div>
   
   <div class='form-group'>
-    <%= f.label :password_confirmation, :class => 'control-label'  %>
-    <div class="form-control">
-        <%= f.password_field :password_confirmation, :autocomplete => 'off' %>
-    </div>
+    <%= f.label :password_confirmation, :class => 'control-label col-md-2'  %>
+	<div class="col-sm-6">
+    	<%= f.password_field :password_confirmation, :autocomplete => 'off', :class => 'form-control' %>
+	</div>
   </div>
   
   <div class="form-group">
-      <%= f.label :plugin_access, :class => "control-label" do %>
+      <%= f.label :plugin_access, :class => "control-label col-md-2" do %>
          <%= t('.plugin_access') %><br>
          <%= link_to "#{t('.enable_all')}", "", :class => "btn btn-mini", :id => "user_plugins_enable_all" %>
       <% end %>
-    <div class="form-control">
+	  <div class="col-md-6">
       <% @available_plugins.each do |plugin| -%>
+  	<div class="checkbox">
         <% if Refinery::Plugins.always_allowed.names.include?(plugin[:name]) or
               (plugin[:name] == 'refinery_users' and @user.id == current_refinery_user.id) %>
           <%= hidden_field_tag 'user[plugins][]', plugin[:name],
                                :id => "plugins_#{plugin[:name]}" %>
         <% else %>
-          <%= f.label "plugins_#{plugin[:name]}", :class => "checkbox" do %>
+          <%= f.label "plugins_#{plugin[:name]}" do %>
             <%= check_box_tag 'user[plugins][]', plugin[:name],
                               @selected_plugin_names.include?(plugin[:name]),
-                              :id => "plugins_#{plugin[:name]}" %>
+                              :id => "user_plugins_#{plugin[:name]}" %>
             <%= t('title', :scope => "refinery.plugins.#{plugin[:name].downcase}", :default => plugin[:title]) %>
           <% end %>
         <% end %>
+  	</div>
       <% end %>
-    </div>
+  </div>
   </div>
 
   <% if current_refinery_user.has_role?(:superuser) and Refinery::Authentication.superuser_can_assign_roles %>
