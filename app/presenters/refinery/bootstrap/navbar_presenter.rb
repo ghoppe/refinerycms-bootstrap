@@ -10,7 +10,7 @@ module Refinery
       self.header_css = 'navbar-header'
       
       self.brand = nil
-      self.brand_link = '#'
+      self.brand_link = '/'
       self.brand_css = 'navbar-brand'
       
       self.selected_css = :active
@@ -49,21 +49,10 @@ module Refinery
           content_tag(:div, :class => "collapse navbar-collapse navbar-#{dom_id}-collapse") do
             buffer = ActiveSupport::SafeBuffer.new
             buffer << render_menu_items(items, list_tag_css)
-            buffer << render_search
             buffer
           end
         end
         
-        def render_search
-          content_tag(:ul, :class => "nav navbar-nav navbar-right") do
-            content_tag(:li) do
-              buffer = ActiveSupport::SafeBuffer.new
-                buffer << link_to(raw(content_tag(:span, "", :class => "glyphicon glyphicon-search")), "#")
-              buffer
-            end
-          end
-        end
- 
         def render_menu(items)
           content_tag(menu_tag, :id => dom_id, :class => css) do
             content_tag(:div, :class => 'container') do
