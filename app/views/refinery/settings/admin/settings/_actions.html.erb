@@ -1,0 +1,5 @@
+<%= render '/refinery/admin/search', :url => refinery.admin_settings_path %>
+
+<div class="btn-group-vertical btn-block">
+    <%= link_to raw('<span class="glyphicon glyphicon-plus"></span>&nbsp; ') << t('.new'), refinery.new_admin_setting_path(:dialog => true), :class => "btn btn-large btn-info" %>
+  </div>

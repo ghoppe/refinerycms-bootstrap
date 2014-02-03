@@ -1,0 +1,15 @@
+<div id="records" class="col-md-8">
+  <%= render 'records' %>
+</div>
+<div id="actions" class="col-md-4">
+  <%= render 'actions' %>
+</div>
+<% content_for :javascripts do %>
+  <script>
+    $(document).ready(function() {
+      $('#records ul li .actions a[href*=edit]').each(function(i, li) {
+        $(li).attr('name', $(li).attr('tooltip'));
+      });
+    });
+  </script>
+<% end -%>

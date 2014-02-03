@@ -1,0 +1,36 @@
+<% title_attribute = (title = attributes.detect { |a| a.type.to_s == "string" }).present? ? title.name : 'title' -%>
+<li class='clearfix record <%%= cycle("on", "on-hover") %>' id="<%%= dom_id(<%= singular_name %>) -%>">
+  <span class='title'>
+    <%%= <%= singular_name %>.<%= title_attribute %> %>
+<% if localized? %>
+    <%% if Refinery::I18n.frontend_locales.many? %>
+      <span class='preview'>
+        <%% <%= singular_name %>.translations.each do |translation| %>
+          <%% if translation.<%= title_attribute %>.present? %>
+            <%%= link_to refinery_icon_tag("flags/#{translation.locale}.png", :size => '16x11'),
+                         refinery.edit_<%= namespacing.underscore %>_admin_<%= singular_name %>_path(<%= singular_name %>, :switch_locale => translation.locale),
+                         :class => 'locale' %>
+          <%% end %>
+        <%% end %>
+      </span>
+    <%% end %>
+<% end %>
+  </span>
+  <span class="btn-group btn-group-xs pull-right">
+      <%%= raw('<span class="glyphicon glyphicon-remove"></span>'), refinery.<%= namespacing.underscore %>_admin_<%= singular_name %>_path(<%= singular_name %>),
+          :class => "btn btn-danger confirm-delete",
+          :title => t('.delete'),
+          :confirm => t('message', :scope => 'refinery.admin.delete', :title => <%= singular_name %>.<%= title_attribute %>),
+          :method => :delete %>
+    <% unless skip_frontend? %>
+    <%%= link_to raw('<span class="glyphicon glyphicon-eye-open"></span>'), refinery.<%= namespacing.underscore %>_<%= singular_name %>_path(<%= singular_name %>),
+        :class => "btn btn-default",
+        :title => t('.view_live_html'),
+        :target => "_blank" %>
+    <% end %>
+    <%%= link_to raw('<span class="glyphicon glyphicon-edit"></span>'), 
+		 refinery.edit_<%= namespacing.underscore %>_admin_<%= singular_name %>_path(<%= singular_name %>),
+         :class => "btn btn-default",
+         :title => t('.edit') %>
+	</span> 
+</li>

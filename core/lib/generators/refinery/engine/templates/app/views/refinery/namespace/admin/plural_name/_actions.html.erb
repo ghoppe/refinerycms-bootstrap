@@ -1,0 +1,23 @@
+<%% if ::Refinery::<%= namespacing %>::Admin::<%= class_name.pluralize %>Controller.searchable? %>
+	<%%= render '/refinery/admin/search', :url => refinery.<%= namespacing.underscore %>_admin_<%= plural_name %><%= "_index" if plural_name == singular_name%>_path %>
+<%% end %>
+
+<div class="btn-group btn-group-vertical btn-block">
+    <%%= link_to raw('<span class="glyphicon glyphicon-plus"></span>&nbsp; ') << t('.create_new'),
+	 	refinery.new_<%= namespacing.underscore %>_admin_<%= singular_name %>_path,
+		:class => "btn btn-lg btn-info" %>
+
+<%% if !searching? && ::Refinery::<%= namespacing %>::Admin::<%= class_name.pluralize %>Controller.sortable? && ::Refinery::<%= namespacing %>::<%= class_name %>.many? %>
+
+	<%%= link_to raw('<span class="glyphicon glyphicon-random"></span>&nbsp; ') << t('.reorder_done', :what => "<%= singular_name.titleize.pluralize %>"),
+             refinery.<%= namespacing.underscore %>_admin_<%= plural_name %><%= "_index" if plural_name == singular_name%>_path,
+             :id => "reorder_action_done",
+             :style => "display: none;",
+             :class => "btn btn-lg btn-success" %>
+
+    <%%= link_to raw('<span class="glyphicon glyphicon-random"></span>&nbsp; ') << t('.reorder', :what => "<%= singular_name.titleize.pluralize %>"),
+                 refinery.<%= namespacing.underscore %>_admin_<%= plural_name %><%= "_index" if plural_name == singular_name%>_path,
+                 :id => "reorder_action",
+                 :class => "btn btn-lg btn-info" %>
+
+<%% end %>
