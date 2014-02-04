@@ -1,3 +1,14 @@
-<div class="col-md-6">
-  <%= render '/seo_meta/form', :form => f %>
+<div class="panel-group col-sm-6" id="ao_seo_accordion">
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h4 class="panel-title">
+        <a class="accordion-toggle" data-toggle="collapse" data-parent="#ao_seo_accordion" href="#ao_seo_collapse">
+          <%= t('seo', :scope => 'seo_meta.form') %>
+        </a>
+      </h4>
+    </div>
+    <div id="ao_seo_collapse" class="panel-collapse collapse col-xs-12">
+	  <%= render '/seo_meta/form', :form => f %>
+	</div>
+  </div>
 </div>
