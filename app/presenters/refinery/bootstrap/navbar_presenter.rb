@@ -11,7 +11,7 @@ module Refinery
       
       self.brand = nil
       self.brand_link = '/'
-      self.brand_css = 'navbar-brand'
+      self.brand_css = 'navbar-brand col-xs-9 col-sm-11'
       
       self.selected_css = :active
       self.list_tag_css = 'nav navbar-nav'
@@ -22,14 +22,8 @@ module Refinery
         def render_navbar_header
           content_tag(:div, :class => header_css ) do
             buffer = ActiveSupport::SafeBuffer.new
-            brand_html = content_tag(:div, :class => 'col-xs-8 col-sm-12' ) do
-              link_to(brand, brand_link, :class => brand_css) unless brand.nil?
-            end
-            toggle_html = content_tag(:div, :class => 'col-xs-4 visible-xs' ) do
-              render_navbar_toggle
-            end
-            buffer << brand_html
-            buffer << toggle_html
+            buffer << render_navbar_toggle
+            buffer << link_to(brand, brand_link, :class => brand_css) unless brand.nil?
             buffer
           end     
         end
