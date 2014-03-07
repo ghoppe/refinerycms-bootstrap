@@ -1,6 +1,6 @@
-# Bootstrap extension for Refinery CMS.
+# Bootstrap Extension for Refinery CMS.
 
-Uses [bootstrap-sass](https://github.com/thomas-mcdonald/bootstrap-sass) for basic [Twitter Bootstrap](http://twitter.github.com/bootstrap/) functionality.
+`refinerycms-bootstrap` uses the official SASS port of Bootstrap [bootstrap-sass](https://github.com/twbs/bootstrap-sass)
+to add [Twitter Bootstrap](http://getbootstrap.com) styles to [Refinery CMS](https://github.com/refinery/refinerycms).
 
-Working on reworking CSS for /refinery/ administrative back-end.
-
+Working on reworking CSS for `/refinery/` administrative back-end.
