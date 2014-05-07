@@ -147,13 +147,7 @@ trigger_reordering_content_section = function(e, enable) {
 };
 
 submit_and_continue = function(e, redirect_to) {
-  // ensure wymeditors are up to date.
-  if ($(this).hasClass('wymupdate')) {
-    $.each(WYMeditor.INSTANCES, function(index, wym)
-    {
-      wym.update();
-    });
-  }
+  visual_editor_update();
 
   $('#continue_editing').val(true);
   $('#flash').fadeOut(250);
