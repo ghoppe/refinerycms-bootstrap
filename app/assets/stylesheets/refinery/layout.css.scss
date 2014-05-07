@@ -474,8 +474,12 @@ pre {
 #records > ul li, #records > #recent_activity > ul li, #records > #recent_inquiries > ul li, #records .pagination_container > ul li, #records .pagination_frame > ul li {
   list-style: none;
   vertical-align: top;
-  line-height: 22px;
+  line-height: 26px;
   position: relative;
+  padding: 0 4px;
+  .btn-group {
+    margin-top: 2px;
+  }
 }
 #records > #recent_activity > ul li, #records > #recent_inquiries > ul li {
   max-height: 35px;
