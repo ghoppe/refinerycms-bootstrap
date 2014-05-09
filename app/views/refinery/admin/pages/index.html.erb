@@ -1,10 +1,8 @@
 <div id="records" class="col-md-8 tree">
-  <% cache_if(Refinery::Pages.cache_pages_backend, [Refinery::Core.base_cache_key, "pages_backend", Globalize.locale].join('_')) do %>
-    <%= render 'records' %>
-  <% end %>
+  <%= render 'records' %>
 </div>
 
 <div id="actions" class="col-md-4">
   <%= render 'actions' %>
 </div>
-<%= render '/refinery/admin/make_sortable', :tree => true, :replace_contents_after_update => true if @pages.many? -%>
+<%= render '/refinery/admin/make_sortable', options: {tree: true, replaceContentsAfterUpdate: true} if @pages.many? -%>

@@ -4,9 +4,20 @@
 </script>
 <%= javascript_include_tag 'admin' -%>
 <%= javascript_include_tag 'refinery/refinery' -%>
-<%= javascript_include_tag 'refinery/wymeditor', "wymeditor/lang/#{current_admin_locale}", "wymeditor/skins/refinery/skin" %>
+<% visual_editor_javascripts.each do |js| %>
+  <%= javascript_include_tag js %>
+<% end %>
+<%= javascript_include_tag 'refinery/application' -%>
 <%= yield :after_javascript_libraries -%>
 <% custom_javascripts.each do |js| %>
   <%= javascript_include_tag js %>
 <% end %>
 <%= yield :javascripts %>
+
+<% if controller.class.respond_to?(:xhr_pageable?) && !controller.class.xhr_pageable? %>
+  <script>
+    $(document).ready(function() {
+      $('.pagination_container .pagination a').off('click');
+    });
+  </script>
+<% end %>
