@@ -87,9 +87,6 @@ label[for] {
   width: 960px;
   padding: 30px 15px;
 }
-#site_bar_content {
-  margin-bottom: 0px;
-}
 #content .field, #content .form-actions {
   position: relative;
 }
@@ -612,12 +609,6 @@ textarea {
   border: inherit;
   width: auto;
   height: 25px;
-}
-label, .label_with_help {
-  margin-bottom: 5px;
-  font-weight: bold;
-  margin-top: 20px;
-  display: block;
 }
 label.input_label {
   font-size: inherit;

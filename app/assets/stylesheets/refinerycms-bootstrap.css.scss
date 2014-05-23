@@ -1,1 +1,11 @@
 @import "bootstrap";
+
+.pages-panel .panel-collapse {
+  background: whitesmoke;
+  border: 1px solid #dddddd;
+}
+
+.pages-panel .panel-collapse .radio,
+.pages-panel .panel-collapse .checkbox {
+  margin-left: 20px;
+}

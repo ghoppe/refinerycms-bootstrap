@@ -1,5 +1,5 @@
 <li class='clearfix record <%= cycle("on", "on-hover") %>'>
-  <span class='title'> AAAAHA
+  <span class='title'>
     <%= item.title %>
     <span class="preview">
       <%= t('.published') %> <%= l(item.publish_date, :format => :short) %>
@@ -14,7 +14,7 @@
       </span>
     <% end %>
   </span>
-  
+
     <div class='pull-right'>
       <div class="btn-group btn-group-xs">
       <%= link_to raw('<span class="glyphicon glyphicon-remove"></span>'),
@@ -40,5 +40,5 @@
       </div>
     </div>
 
-  
+
 </li>
