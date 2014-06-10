@@ -17,17 +17,6 @@ body#admin {
   text-align: left;
   width: 990px;
 }
-#site_bar {
-  background: #22a7f2;
-  border-bottom: 0px none;
-  margin-bottom: 0px;
-  position: fixed;
-  width: 100%;
-  z-index: 999;
-}
-a#site_bar_refinery_cms_logo {
-  left: 448px;
-}
 #site_bar, #site_bar * {
   color: white;
   font-family: Arial;
@@ -63,6 +52,11 @@ a#site_bar_refinery_cms_logo {
   height: 47px;
   background: #22a7f2;
   padding: 0px;
+  border-bottom: 0px none;
+  margin-bottom: 0px;
+  position: fixed;
+  width: 100%;
+  z-index: 999;
   * {
     line-height: 47px;
   }
