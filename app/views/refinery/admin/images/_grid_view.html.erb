@@ -1,7 +1,7 @@
 <ul id="image_grid" class="<%= ['clearfix', 'pagination_frame', pagination_css_class].compact.join(' ') %>">
   <% @images.each_with_index do |image, index| -%>
     <li id="image_<%= image.id %>" class="image_<%= index % 5 %>">
-      <%= image_fu image, '135x135#c', :title => image.title %>
+      <%= image_fu image, '135X135#c', :title => image.title %>
       <span class='btn-group btn-group-justified btn-group-xs'>
         <%= link_to raw('<span class="glyphicon glyphicon-remove"></span>'),
                     refinery.admin_image_path(image, params.slice(:page)),
