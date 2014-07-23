@@ -6,7 +6,7 @@ Gem::Specification.new do |s|
   s.version           = '3.2.0.0'
   s.author            = 'Glenn Hoppe'
   s.description       = 'Ruby on Rails Bootstrap extension for Refinery CMS'
-  s.date              = '2013-09-09'
+  s.date              = '2014-07-22'
   s.summary           = 'Bootstrap extension for Refinery CMS'
   s.require_paths     = %w(lib)
   s.files             = Dir["{app,config,db,lib}/**/*"] + ["readme.md"]
