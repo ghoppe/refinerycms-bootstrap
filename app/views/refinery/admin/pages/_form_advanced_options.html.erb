@@ -3,79 +3,76 @@
     <div class="panel-heading">
       <h4 class="panel-title">
         <a class="accordion-toggle" data-toggle="collapse" data-parent="#ao_accordion" href="#ao_collapse">
-		        Advanced Options
+          <%= t('.page_options') %>
         </a>
       </h4>
     </div>
     <div id="ao_collapse" class="panel-collapse collapse col-xs-12">
       <div class="form-group">
         <%= f .label :parent_id do %>
-		      <%= t( '.parent_page') %> &nbsp;
-			    <%= link_to glyph('question-sign'), '#', :class => 'help', :title => t('.parent_page_help'), :data => {:toggle => 'tooltip'} %>
-		    <% end %>
-        <%= f .select :parent_id, nested_set_options(::Refinery::Page, @page) {|i| "#{'-' * i.level} #{i.title}" }, { :include_blank=>true}, { :class => "form-control input-sm" } %>
+          <%= t( '.parent_page') %> &nbsp;
+          <%= link_to glyph('question-sign'), '#', :class => 'help', :title => t('.parent_page_help'), :data => {:toggle => 'tooltip'} %>
+        <% end %>
+        <%= f .select :parent_id, parent_id_nested_set_options(@page), :include_blank=>true, { :class => "form-control input-sm" } %>
       </div>
 
-	  <% if Refinery::Pages.use_layout_templates %>
-  	  <div class="form-group">
-  		  <%= f .label :layout_template, :class=>'control-label' do %>
-  		    <%= t( '.layout_template') %> &nbsp;
-  		 	 <%= link_to glyph('question-sign'), '#', :class => 'help', :title => t('.layout_template_help'), :data => {:toggle => 'tooltip'} %>
-  		  <% end %>
-  		  <%= f .select :layout_template, @valid_layout_templates, template_options(:layout_template, @page), { :class=>"form-control input-sm" } %>
-  		</div>
-	  <% end %>
-
-	  <div class="form-group">
-		  <%= f .label :view_template, t('.view_template'), :class=>'control-label' do %>
-        <%= t( '.view_template') %> &nbsp;
-        <%= link_to glyph('question-sign'), '#', :class => 'help', :title => t('.view_template_help'), :data => {:toggle => 'tooltip'} %>
+      <% if Refinery::Pages.use_layout_templates %>
+      <div class="form-group">
+        <%= f .label :layout_template, :class=>'control-label' do %>
+          <%= t( '.layout_template') %> &nbsp;
+          <%= link_to glyph('question-sign'), '#', :class => 'help', :title => t('.layout_template_help'), :data => {:toggle => 'tooltip'} %>
+        <% end %>
+        <%= f .select :layout_template, valid_layout_templates, template_options(:layout_template, @page), { :class=>"form-control input-sm" } %>
+      </div>
       <% end %>
-		  <%= f .select :view_template, @valid_view_templates.map { |t| [t.titleize, t] }, template_options(:view_template, @page), { :class=>"form-control input-sm" } %>
-		</div>
-
-	  <div class="form-group">
-		  <%= f .label :menu_title, t('.menu_title'), :class=>'control-label' do %>
-        <%= t( '.menu_title') %> &nbsp;
-        <%= link_to glyph('question-sign'), '#', :class => 'help', :title => t('.menu_title_help'), :data => {:toggle => 'tooltip'} %>
-      <% end %>
-      <%= f .text_field :menu_title, :class=>'form-control' %>
-		</div>
-
-    <% if Refinery::Pages.use_custom_slugs %>
-	    <div class="form-group">
-	      <%= f .label :custom_slug, t( '.custom_slug'), :class=>'control-label' %>
-	      <div class="form-control">
-	        <%= f .text_field :custom_slug %>
-	        <span class="help-block"><%= t('.custom_slug_help') %></span>
-	      </div>
-	    </div>
-    <% end %>
-
-    <div class="form-group">
-      <%= f .label :skip_to_first_child?, t( '.skip_to_first_child') %>
-      <%= link_to glyph('question-sign'), '#', :class => 'help', :title => t('.skip_to_first_child_help'), :data => {:toggle => 'tooltip'} %>
-      <%= f .label :skip_to_first_child, :class=>"checkbox" do %>
-        <%= f .check_box :skip_to_first_child %>
-        <%= t ( '.skip_to_first_child_label') %>
-      <% end %>
-    </div>
 
       <div class="form-group">
-          <%= f .label :link_url, t( '.link_url') %>
-          <%= link_to glyph('question-sign'), '#', :class => 'help', :title => t('.link_url_help'), :data => {:toggle => 'tooltip'} %>
-          <%= f .text_field :link_url, :class=>'form-control' %>
+        <%= f .label :view_template, t('.view_template'), :class=>'control-label' do %>
+          <%= t( '.view_template') %> &nbsp;
+          <%= link_to glyph('question-sign'), '#', :class => 'help', :title => t('.view_template_help'), :data => {:toggle => 'tooltip'} %>
+        <% end %>
+        <%= f .select :view_template, valid_view_templates.map { |t| [t.titleize, t] }, template_options(:view_template, @page), { :class=>"form-control input-sm" } %>
+      </div>
+      <div class="form-group">
+        <%= f .label :menu_title, t('.menu_title'), :class=>'control-label' do %>
+          <%= t( '.menu_title') %> &nbsp;
+          <%= link_to glyph('question-sign'), '#', :class => 'help', :title => t('.menu_title_help'), :data => {:toggle => 'tooltip'} %>
+        <% end %>
+        <%= f .text_field :menu_title, :class=>'form-control' %>
+      </div>
+
+      <% if Refinery::Pages.use_custom_slugs %>
+      <div class="form-group">
+        <%= f .label :custom_slug, t( '.custom_slug'), :class=>'control-label' %>
+        <div class="form-control">
+          <%= f .text_field :custom_slug %>
+          <span class="help-block"><%= t('.custom_slug_help') %></span>
         </div>
+      </div>
+      <% end %>
 
       <div class="form-group">
-          <%= f .label :show_in_menu, t( '.show_in_menu_title'), :id=>'page_show_in_menu_heading' %>
-          <%= link_to glyph('question-sign'), '#', :class => 'help', :title => t('.show_in_menu_help'), :data => {:toggle => 'tooltip'} %>
-          <%= f .label :show_in_menu, :class=>"checkbox" do %>
-            <%= f .check_box :show_in_menu %>
-            <%= t ( '.show_in_menu_description') %>
-          <% end %>
+        <%= f .label :skip_to_first_child?, t( '.skip_to_first_child') %>
+        <%= link_to glyph('question-sign'), '#', :class => 'help', :title => t('.skip_to_first_child_help'), :data => {:toggle => 'tooltip'} %>
+        <%= f .label :skip_to_first_child, :class=>"checkbox" do %>
+          <%= f .check_box :skip_to_first_child %>
+          <%= t ( '.skip_to_first_child_label') %>
+        <% end %>
       </div>
-	  </div>
+      <div class="form-group">
+        <%= f .label :link_url, t( '.link_url') %>
+        <%= link_to glyph('question-sign'), '#', :class => 'help', :title => t('.link_url_help'), :data => {:toggle => 'tooltip'} %>
+        <%= f .text_field :link_url, :class=>'form-control' %>
+      </div>
+      <div class="form-group">
+        <%= f .label :show_in_menu, t( '.show_in_menu_title'), :id=>'page_show_in_menu_heading' %>
+        <%= link_to glyph('question-sign'), '#', :class => 'help', :title => t('.show_in_menu_help'), :data => {:toggle => 'tooltip'} %>
+        <%= f .label :show_in_menu, :class=>"checkbox" do %>
+          <%= f .check_box :show_in_menu %>
+          <%= t ( '.show_in_menu_description') %>
+        <% end %>
+      </div>
+    </div>
   </div>
 </div>
 
@@ -83,9 +80,9 @@
   <script>
     $(document).ready(function () {
       link_tester.validate_url_textbox("#page_link_url");
-  	  $('[data-toggle="tooltip"]').tooltip({
-  	      'placement': 'right'
-  	  });
+      $('[data-toggle="tooltip"]').tooltip({
+          'placement': 'right'
+      });
     });
   </script>
 <% end %>
