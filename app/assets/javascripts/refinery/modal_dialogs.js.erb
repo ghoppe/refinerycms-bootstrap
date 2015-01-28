@@ -14,9 +14,8 @@ init_modal_dialogs = function(){
                    + 'app_dialog=true&dialog=true';
 
       iframe = $("<iframe id='dialog_iframe' frameborder='0' marginheight='0' marginwidth='0' border='0'></iframe>");
-	  var dialog_title = $anchor.data('dialog-title').replace(/<span.*<\/span>\s+/g,"");
-	  iframe.dialog({
-        title: dialog_title
+      iframe.dialog({
+        title: $anchor.data('dialog-title')
         , modal: true
         , resizable: false
         , autoOpen: true
@@ -25,6 +24,7 @@ init_modal_dialogs = function(){
         , open: onOpenDialog
         , close: onCloseDialog
       });
+
       iframe.attr('src', iframe_src);
       e.preventDefault();
     });
