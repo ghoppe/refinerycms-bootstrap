@@ -44,7 +44,7 @@
                   :title => t('new', :scope => 'refinery.admin.pages') %>
 
       <%= link_to raw('<span class="glyphicon glyphicon-edit"></span>'),
-                  refinery.edit_admin_page_path(page.nested_url, :switch_locale => (page.translations.first.locale unless page.translated_to_default_locale?)),
+                  refinery.admin_edit_page_path(page.nested_url, :switch_locale => (page.translations.first.locale unless page.translated_to_default_locale?)),
                   :class => "btn btn-default",
                   :title => t('edit', :scope => 'refinery.admin.pages') %>
       </div>
