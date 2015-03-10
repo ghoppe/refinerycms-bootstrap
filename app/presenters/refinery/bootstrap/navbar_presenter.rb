@@ -11,7 +11,7 @@ module Refinery
 
       self.brand = nil
       self.brand_link = '/'
-      self.brand_css = 'navbar-brand col-xs-9 col-sm-11'
+      self.brand_css = 'navbar-brand'
 
       self.selected_css = :active
       self.list_tag_css = 'nav navbar-nav'
