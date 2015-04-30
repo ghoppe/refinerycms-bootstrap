@@ -42,6 +42,7 @@ label[for] {
 
 #admin-content {
   background: white;
+  overflow: hidden;
   form, .pagination_container {
   	margin: 20px;
   }
@@ -55,6 +56,8 @@ label[for] {
   } */
   #records { padding-top: 20px; }
   #actions {
+    background: #eeeeee;
+    border-left: 1px solid #ccc;
 	  padding-bottom: 20px;
 	.well {margin-top: 20px;}
 	 h3 { margin-top: 0;}
@@ -72,6 +75,14 @@ label[for] {
 	  }
     }
   }
+}
+
+#admin-content #records, #admin-content #actions {
+  padding-top: 10px;
+  padding-left: 20px;
+  padding-right: 20px;
+  margin-bottom: -99979px;
+  padding-bottom: 99999px;
 }
 
 .form-actions {
