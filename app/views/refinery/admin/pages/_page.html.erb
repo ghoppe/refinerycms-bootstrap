@@ -1,56 +1,50 @@
-<li class='clearfix record icons' id="<%= dom_id(page) -%>">
+<% # setup params for various action links
+  add_url =   refinery.new_admin_page_path(parent_id: page.id)
+  edit_url =  refinery.admin_edit_page_path(page.nested_url, switch_locale: (page.translations.first.locale unless page.translated_to_default_locale?))
+  delete_url = refinery.admin_delete_page_path(page.nested_url)
+  delete_options = {
+     class: "cancel confirm-delete",
+            data: {confirm: t('message',  scope: 'refinery.admin.delete', title: page_title_with_translations(page))}
+          }
+ %>
+
+  <li class='clearfix record items' id="<%= dom_id(page) -%>">
   <div class='clearfix'>
     <% if page.children.present? %>
-      <span class="icon toggle <%= 'expanded' if Refinery::Pages.auto_expand_admin_tree %>" title="<%= t('expand_collapse', :scope => 'refinery.admin.pages') %>"></span>
+      <span class="item toggle <%= 'expanded' if Refinery::Pages.auto_expand_admin_tree %>" title="<%= t('expand_collapse')%>"></span>
     <% else %>
-      <span class="icon"></span>
+      <span class="item"></span>
     <% end %>
 
     <span class='title <%= 'toggle' if page.children.present? %>'>
       <%= page_title_with_translations page %>
       <%= page_meta_information page %>
     </span>
+
     <% if Refinery::I18n.frontend_locales.many? %>
       <span class='locales'>
-        <% page.translations.sort_by{|t| Refinery::I18n.frontend_locales.index(t.locale)}.each do |translation| %>
-          <%= link_to refinery_icon_tag("flags/#{translation.locale}.png", :size => '16x11'),
-                      refinery.edit_admin_page_path(page.nested_url, :switch_locale => translation.locale),
-                      :class => 'locale' if translation.title.present? %>
+        <% page.translations.sort_by{ |t| Refinery::I18n.frontend_locales.index(t.locale)}.each do |translation| %>
+          <% if translation.title.present? %>
+            <%= link_to refinery.admin_edit_page_path(page.nested_url, switch_locale: translation.locale),
+                        class: 'locale', title: translation.locale.upcase do %>
+
+              <div class="<%=translation.locale %> locale_marker">
+                <%= locale_text_icon(translation.locale.upcase) %>
+              </div>
+            <% end %>
+          <% end %>
         <% end %>
       </span>
     <% end %>
 
-    <div class='pull-right'>
-      <div class="btn-group btn-group-xs">
-      <%= link_to raw('<span class="glyphicon glyphicon-remove"></span>'),
-                  refinery.admin_page_path(page.nested_url),
-                  :class => "btn btn-danger btn-default confirm-delete",
-                  :title => t('delete', :scope => 'refinery.admin.pages'),
-                  :data => {
-                    :confirm => t('message',
-                      :scope => 'refinery.admin.delete',
-                      :title => page_title_with_translations(page)
-                    )
-                  },
-                  :method => :delete if page.deletable? %>
-      <%= link_to raw('<span class="glyphicon glyphicon-eye-open"></span>'),
-                  page.url,
-                  :class => "btn btn-default",
-                  :target => "_blank",
-                  :title => t('.view_live_html') %>
-      <%= link_to raw('<span class="glyphicon glyphicon-plus"></span>'),
-                  refinery.new_admin_page_path(:parent_id => page.id),
-                  :class => "btn btn-default",
-                  :title => t('new', :scope => 'refinery.admin.pages') %>
-
-      <%= link_to raw('<span class="glyphicon glyphicon-edit"></span>'),
-                  refinery.admin_edit_page_path(page.nested_url, :switch_locale => (page.translations.first.locale unless page.translated_to_default_locale?)),
-                  :class => "btn btn-default",
-                  :title => t('edit', :scope => 'refinery.admin.pages') %>
-      </div>
-    </div>
+    <span class='actions'>
+      <%= action_icon(:preview, page.url,   t('.view_live_html')) %>
+      <%= action_icon(:add,     add_url,    t('new',    scope: 'refinery.admin.pages' ) ) %>
+      <%= action_icon(:edit,    edit_url ,  t('edit',   scope: 'refinery.admin.pages' ) ) %>
+      <%= action_icon(:delete,  delete_url, t('delete', scope: 'refinery.admin.pages' ), delete_options ) if page.deletable? %>
+    </span>
   </div>
   <ul class='nested' data-ajax-content="<%= refinery.admin_children_pages_path(page.nested_url) %>">
-    <%= render(:partial => 'page', :collection => page.children) if Refinery::Pages.auto_expand_admin_tree %>
+    <%= render(partial: 'page', collection: page.children) if Refinery::Pages.auto_expand_admin_tree %>
   </ul>
 </li>

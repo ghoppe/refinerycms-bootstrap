@@ -5,20 +5,22 @@
   <body id="admin" class="<%= action_name %> <%= I18n.locale %>">
     <%= render '/refinery/site_bar' %>
     <div id='tooltip_container'></div>
-    <div class="container">
+    <div id="admin_container" class="container">
       <div class="row">
-        <header id="header" class="col-md-12">
+        <header id="header" class="col-lg-2 col-md-3 col-sm-4">
           <%= render 'refinery/admin/menu' %>
-      </header>
-    </div>
-    <div class="row hidden">
-        <div id="flash_container" class="col-md-12">
-          <%= render '/refinery/no_script' %>
-          <%= render '/refinery/message' %>
+        </header>
+        <div id="page_container" class="col-lg-10 col-md-9 col-sm-8">
+          <div id="page">
+            <div id="content">
+              <div id="flash_container">
+                <%= render '/refinery/no_script' %>
+                <%= render '/refinery/message' %>
+              </div>
+              <%= yield %>
+            </div>
+          </div>
         </div>
-      </div>
-      <div id="admin-content" class="row">
-        <%= yield %>
       </div>
     </div>
   </body>
