@@ -44,8 +44,15 @@ label[for] {
     display: none;
   }
 }
+#admin #page {
+  margin-top: 30px;
+}
+
+#actions .form-search {
+  margin-bottom: 30px;
+}
 #login_container {
-  background: white;
+  background: none; /* Bootstrap */
   width: 620px;
 }
 #content .field, #content .form-actions {
@@ -60,32 +67,6 @@ input.widest, textarea.widest {
 }
 select.widest {
   max-width: 99%;
-}
-#records {
-  float: left;
-  width: 67.7%;
-}
-#actions {
-  float: right;
-  width: 30%;
-  padding-left: 15px;
-  padding-top: 0px;
-  ul {
-    margin: 0px 0px 18px 0px;
-    padding: 0;
-    list-style: none;
-    &#current_locale {
-      margin-top: 30px;
-    }
-  }
-  li {
-    margin-bottom: 10px;
-    background-color: $action-background-colour;
-    border: 1px solid $action-border-colour;
-    padding: 9px;
-    display: block;
-
-  }
 }
 #sort-status {
   padding: 5px 5px 5px 0px;
@@ -226,6 +207,9 @@ noscript .flash.flash_alert a, noscript .flash.flash_alert a:hover {
 }
 #content {
   background-color: white;
+}
+.login #content {
+  background: none; /* bootstrap */
 }
 header, footer, nav {
   display: block;
@@ -539,8 +523,6 @@ pre {
   margin-top: 0px;
 }
 .pagination {
-  background-color: #C9DAE2;
-  padding: 5px 5px 4px 5px;
   margin: 10px 0px;
   em {
     font-weight: bold;
@@ -1238,10 +1220,6 @@ span.button-wrapper input {
   border: 1px solid #7f9db9;
   padding: 0.4% 0.5%;
   line-height: 20px;
-}
-/* ## Advanced Page Options --------------------------------------------- */
-#more_options_field {
-  span#draft_field {float: right;}
 }
 #more_options{
   overflow:hidden;

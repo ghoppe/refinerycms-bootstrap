@@ -1,7 +1,6 @@
-<div id="more_options_field" >
-  <span id="draft_field">
-    <%= f.check_box :draft %>
-    <%= f.label :draft, t('.save_as_draft'),
-                :class => "stripped" %>
-  </span>
+<div class="checkbox">
+  <%= f .label :draft do %>
+    <%= f .check_box :draft %>
+    <%= t('.save_as_draft') %>
+  <% end %>
 </div>

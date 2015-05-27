@@ -3,18 +3,17 @@
   <% site_bar = render('/refinery/site_bar', :head => true) -%>
   <head>
     <%= render "/refinery/head" %>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
   </head>
   <body id="<%= canonical_id @page %>">
     <%= site_bar -%>
-    <div id="page_container">
-      <header id="header" class="container">
+    <div id="page_container" class="container">
+      <header id="header">
         <%= render "/refinery/header" -%>
       </header>
-      <div id="page" class="container">
+      <div id="page">
         <%= yield %>
       </div>
-      <footer class="container">
+      <footer>
         <%= render "/refinery/footer" -%>
       </footer>
     </div>

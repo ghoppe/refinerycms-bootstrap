@@ -38,16 +38,24 @@
 <input type='hidden' name='dialog' value='true' />
 <% end %>
 
-<div class='well well-sm form-actions<%= ' form-actions-dialog' if from_dialog? %>'>
+<div class='form-actions<%= ' form-actions-dialog' if from_dialog? %>'>
   <div class='pull-left'>
-    <%= submit_tag submit_button_text,
+    <div class="btn-group">
+      <%= submit_tag submit_button_text,
                    :id => submit_button_id,
                    :name => nil,
                    :class => "btn btn-lg btn-primary",
                    :tooltip => submit_button_title unless hide_submit %>
-
-    <%= render '/refinery/admin/continue_editing', :f => f if continue_editing -%>
-    <%= hidden_field_tag :continue_editing, false if continue_editing %>
+      <button type="button" class="btn btn-lg btn-primary dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+        <span class="caret"></span>
+        <span class="sr-only">Toggle Dropdown</span>
+      </button>
+      <ul class="dropdown-menu well well-sm" role="menu">
+        <%= hidden_field_tag :continue_editing, false if continue_editing %>
+        <%= render '/refinery/admin/continue_editing', :f => f if continue_editing -%>
+        <%= render '/refinery/admin/form_advanced_options_menu', :f => f %>
+      </ul>
+    </div>
 
     <%= local_assigns[:before_cancel_button] -%>
 

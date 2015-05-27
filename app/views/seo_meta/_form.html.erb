@@ -1,14 +1,10 @@
 <div class="form-group">
   <%= form.label :browser_title, t('seo_override_title', :scope => 'seo_meta.form'), :class=>'control-label' %>
+  &nbsp;<%= refinery_help_tag t('seo_override_title_help', :scope => 'seo_meta.form')%>
   <%= form.text_field :browser_title, :class => 'form-control' %>
-  <span class='help-block'>
-    <%= refinery_help_tag t('seo_override_title_help', :scope => 'seo_meta.form')%>
-  </span>
 </div>
 <div class='form-group'>
   <%= form.label :meta_description, t('meta_description_title', :scope => 'seo_meta.form'), :class=>'control-label' %>
+  &nbsp;<%= refinery_help_tag t('meta_description_help', :scope => 'seo_meta.form') %>
   <%= form.text_area :meta_description, :class => 'form-control', :rows => 7 %>
-  <span class='help-block'>
-    <%= refinery_help_tag t('meta_description_help', :scope => 'seo_meta.form') %>
-  </span>
 </div>

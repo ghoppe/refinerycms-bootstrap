@@ -1,5 +1,6 @@
 <% content_for :header, t('.hello_please_sign_in') %>
 
+<div class="well">
 <%= form_for resource, :as => resource_name,
                        :url => refinery.refinery_user_session_path do |f| %>
   <div class='form-group session_username'>
@@ -26,3 +27,4 @@
              :submit_button_text => t('.sign_in'),
              :hide_cancel => true %>
 <% end -%>
+</div>

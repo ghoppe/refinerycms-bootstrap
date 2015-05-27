@@ -1,6 +1,6 @@
 <input type="hidden" name="switch_locale" id="switch_locale" value="<%= local_assigns[:current_locale] %>" />
-<button class="btn btn-info btn-block dropdown-toggle" data-toggle="dropdown">
-	 <%= local_assigns[:current_locale] %> <span class="caret"></span>
+<button class="btn btn-default input-lg dropdown-toggle" data-toggle="dropdown">
+   <%= local_assigns[:current_locale] %> <span class="caret"></span>
 </button>
 <% if Refinery::I18n.frontend_locales.many? %>
   <ul class="dropdown-menu" role="menu">

@@ -2,11 +2,12 @@ module Refinery
   module Bootstrap
     class NavbarPresenter < ::Refinery::Bootstrap::MenuPresenter
 
-      config_accessor :brand, :brand_link, :header_css, :brand_css
+      config_accessor :brand, :brand_link, :container_css, :header_css,  :brand_css
 
-      self.css = 'navbar navbar-default navbar-fixed-top'
-      self.menu_tag = :div
+      self.css = 'navbar navbar-default'
+      self.menu_tag = :nav
 
+      self.container_css = 'container-fluid'
       self.header_css = 'navbar-header'
 
       self.brand = nil
@@ -49,13 +50,11 @@ module Refinery
 
         def render_menu(items)
           content_tag(menu_tag, :id => dom_id, :class => css) do
-            content_tag(:div, :class => 'container') do
-              content_tag(:div, :class => 'row') do
-                buffer = ActiveSupport::SafeBuffer.new
-                buffer << render_navbar_header
-                buffer << render_collapse_menu_items(items)
-                buffer
-              end
+            content_tag(:div, :class => container_css) do
+              buffer = ActiveSupport::SafeBuffer.new
+              buffer << render_navbar_header
+              buffer << render_collapse_menu_items(items)
+              buffer
             end
           end
         end

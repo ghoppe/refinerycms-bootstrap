@@ -10,8 +10,8 @@
     <div id="ao_collapse" class="panel-collapse collapse col-xs-12">
       <div class="form-group">
         <%= f .label :parent_id do %>
-          <%= t( '.parent_page') %> &nbsp;
-          <%= link_to glyph('question-sign'), '#', :class => 'help', :title => t('.parent_page_help'), :data => {:toggle => 'tooltip'} %>
+          <%= t( '.parent_page') %>
+          &nbsp;<%= refinery_help_tag t('.parent_page_help') %>
         <% end %>
         <%= f .select :parent_id, parent_id_nested_set_options(@page), {:include_blank => true }, { :class => "form-control input-sm" } %>
       </div>
@@ -19,8 +19,8 @@
       <% if Refinery::Pages.use_layout_templates %>
       <div class="form-group">
         <%= f .label :layout_template, :class=>'control-label' do %>
-          <%= t( '.layout_template') %> &nbsp;
-          <%= link_to glyph('question-sign'), '#', :class => 'help', :title => t('.layout_template_help'), :data => {:toggle => 'tooltip'} %>
+          <%= t( '.layout_template') %>
+          &nbsp;<%= refinery_help_tag t('.layout_template_help') %>
         <% end %>
         <%= f .select :layout_template, valid_layout_templates, template_options(:layout_template, @page), { :class=>"form-control input-sm" } %>
       </div>
@@ -28,15 +28,15 @@
 
       <div class="form-group">
         <%= f .label :view_template, t('.view_template'), :class=>'control-label' do %>
-          <%= t( '.view_template') %> &nbsp;
-          <%= link_to glyph('question-sign'), '#', :class => 'help', :title => t('.view_template_help'), :data => {:toggle => 'tooltip'} %>
+          <%= t( '.view_template') %>
+          &nbsp;<%= refinery_help_tag t('.view_template_help') %>
         <% end %>
         <%= f .select :view_template, valid_view_templates.map { |t| [t.titleize, t] }, template_options(:view_template, @page), { :class=>"form-control input-sm" } %>
       </div>
       <div class="form-group">
         <%= f .label :menu_title, t('.menu_title'), :class=>'control-label' do %>
-          <%= t( '.menu_title') %> &nbsp;
-          <%= link_to glyph('question-sign'), '#', :class => 'help', :title => t('.menu_title_help'), :data => {:toggle => 'tooltip'} %>
+          <%= t( '.menu_title') %>
+          &nbsp;<%= refinery_help_tag t('.menu_title_help') %>
         <% end %>
         <%= f .text_field :menu_title, :class=>'form-control' %>
       </div>
@@ -53,7 +53,7 @@
 
       <div class="form-group">
         <%= f .label :skip_to_first_child?, t( '.skip_to_first_child') %>
-        <%= link_to glyph('question-sign'), '#', :class => 'help', :title => t('.skip_to_first_child_help'), :data => {:toggle => 'tooltip'} %>
+        &nbsp;<%= refinery_help_tag t('.skip_to_first_child_help') %>
         <%= f .label :skip_to_first_child, :class=>"checkbox" do %>
           <%= f .check_box :skip_to_first_child %>
           <%= t ( '.skip_to_first_child_label') %>
@@ -61,12 +61,12 @@
       </div>
       <div class="form-group">
         <%= f .label :link_url, t( '.link_url') %>
-        <%= link_to glyph('question-sign'), '#', :class => 'help', :title => t('.link_url_help'), :data => {:toggle => 'tooltip'} %>
+        &nbsp;<%= refinery_help_tag t('.link_url_help') %>
         <%= f .text_field :link_url, :class=>'form-control' %>
       </div>
       <div class="form-group">
         <%= f .label :show_in_menu, t( '.show_in_menu_title'), :id=>'page_show_in_menu_heading' %>
-        <%= link_to glyph('question-sign'), '#', :class => 'help', :title => t('.show_in_menu_help'), :data => {:toggle => 'tooltip'} %>
+        &nbsp;<%= refinery_help_tag t('.show_in_menu_help') %>
         <%= f .label :show_in_menu, :class=>"checkbox" do %>
           <%= f .check_box :show_in_menu %>
           <%= t ( '.show_in_menu_description') %>

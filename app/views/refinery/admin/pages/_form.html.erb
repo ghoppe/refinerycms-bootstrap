@@ -4,40 +4,39 @@
 
   <div class="form-group">
     <%= f.label :title, :class => "control-label" %>
-	<div class="row">
-  		<div class="col-sm-10">
-	    	<%= f.text_field :title, :class => "form-control" %>
-		</div>
-  		<div class="col-sm-2">
-			<%= render '/refinery/admin/locale_picker', :current_locale => Globalize.locale %>
-		</div>
-  	</div>
+    <div class="input-group">
+      <%= f.text_field :title, :class => "form-control input-lg" %>
+      <div class="input-group-btn">
+        <%= render '/refinery/admin/locale_picker', :current_locale => Globalize.locale %>
+      </div>
+    </div>
   </div>
 
   <%= render 'form_fields_after_title', :f => f %>
-  <%= render '/refinery/admin/form_advanced_options_menu', :f => f %>
+
   <%= render 'form_page_parts', :f => f %>
-  
+
   <br>
-  
+
   <div class="row">
-  	<%= render 'form_advanced_options', 		:f => f %>
-  	<%= render 'form_advanced_options_seo', 	:f => f %>
+    <%= render 'form_advanced_options',     :f => f %>
+    <%= render 'form_advanced_options_seo',   :f => f %>
   </div>
 
   <%= render '/refinery/admin/form_actions', :f => f,
-             :continue_editing => true,
-             :delete_title => t('delete', :scope => 'refinery.admin.pages'),
-             :delete_confirmation => t('message', :scope => 'refinery.admin.delete', :title => @page.title),
-             :before_cancel_button => submit_tag(
-               t('.preview'),
-               :id => 'preview-button',
-               :title => 'Preview page',
-               :name => nil,
-               :class => "btn btn-lg btn-info",
-               :tooltip => t('.preview_changes')
-             ),
-             :cancel_url => refinery.admin_pages_path %>
+       :continue_editing => true,
+       :submit_button_text => "Save Page",
+       :delete_title => t('delete', :scope => 'refinery.admin.pages'),
+       :delete_confirmation => t('message', :scope => 'refinery.admin.delete', :title => @page.title),
+       :before_cancel_button => submit_tag(
+         t('.preview'),
+         :id => 'preview-button',
+         :title => 'Preview page',
+         :name => nil,
+         :class => "btn btn-lg btn-info",
+         :tooltip => t('.preview_changes')
+       ),
+       :cancel_url => refinery.admin_pages_path %>
 
   <%= render 'form_new_page_parts', :f => f if Refinery::Pages.new_page_parts %>
 <% end %>
