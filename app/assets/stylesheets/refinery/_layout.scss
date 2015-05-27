@@ -208,6 +208,9 @@ noscript .flash.flash_alert a, noscript .flash.flash_alert a:hover {
 #content {
   background-color: white;
 }
+#admin_container #content {
+  margin-top: 30px;
+}
 .login #content {
   background: none; /* bootstrap */
 }
@@ -302,7 +305,7 @@ div.field.checkbox_access {
 }
 #menu, {
   display: block;
-  margin: 45px 0px 0px 0px;
+  margin: 15px 0px 0px 0px;
   padding: 0px;
   position: absolute;
   background: transparent;
@@ -653,6 +656,9 @@ label.stripped {
   text-align: right;
   display: block;
   line-height: 28px;
+}
+#actions {
+  margin-bottom: 30px;
 }
 #records.tree.icons .title {
   display: block;

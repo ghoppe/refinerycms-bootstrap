@@ -17,6 +17,7 @@
   end
 
   continue_editing = defined?(continue_editing) ? continue_editing : (f.object.present? and f.object.persisted?)
+  advanced_options = defined?(advanced_options) ? advanced_options : (f.object.present? and f.object.persisted?)
 
   unless defined?(hide_delete).presence
     hide_delete = (from_dialog? or
@@ -46,15 +47,17 @@
                    :name => nil,
                    :class => "btn btn-lg btn-primary",
                    :tooltip => submit_button_title unless hide_submit %>
-      <button type="button" class="btn btn-lg btn-primary dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-        <span class="caret"></span>
-        <span class="sr-only">Toggle Dropdown</span>
-      </button>
-      <ul class="dropdown-menu well well-sm" role="menu">
-        <%= hidden_field_tag :continue_editing, false if continue_editing %>
-        <%= render '/refinery/admin/continue_editing', :f => f if continue_editing -%>
-        <%= render '/refinery/admin/form_advanced_options_menu', :f => f %>
-      </ul>
+      <% if continue_editing or advanced_options %>
+        <button type="button" class="btn btn-lg btn-primary dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+          <span class="caret"></span>
+          <span class="sr-only">Toggle Dropdown</span>
+        </button>
+        <ul class="dropdown-menu well well-sm" role="menu">
+          <%= hidden_field_tag :continue_editing, false if continue_editing %>
+          <%= render '/refinery/admin/continue_editing', :f => f if continue_editing -%>
+          <%= render '/refinery/admin/form_advanced_options_menu', :f => f if advanced_options %>
+        </ul>
+      <% end %>
     </div>
 
     <%= local_assigns[:before_cancel_button] -%>
