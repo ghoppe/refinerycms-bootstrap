@@ -4,10 +4,12 @@ module Refinery
   module Bootstrap
     class MenuPresenter < ::Refinery::Pages::MenuPresenter
       include ActionView::Helpers::OutputSafetyHelper
-      
+
       # needed for refinerycms 2.1 stable. Only on master.
       config_accessor :list_tag_css
-      
+
+    private
+
       def render_menu_items(menu_items, menu_items_css)
         if menu_items.present?
           content_tag(list_tag, :class => menu_items_css) do
@@ -17,7 +19,7 @@ module Refinery
           end
         end
       end
-      
+
       def render_menu_item(menu_item, index)
         content_tag(list_item_tag, :class => menu_item_css(menu_item, index)) do
           buffer = ActiveSupport::SafeBuffer.new
@@ -30,7 +32,14 @@ module Refinery
           buffer
         end
       end
-      
+
+      def menu_item_css(menu_item, index)
+        css = []
+        css << selected_css if selected_item_or_descendant_item_selected?(menu_item)
+        css << :dropdown if menu_item_children(menu_item).present? and menu_item.depth == 0
+        css.reject(&:blank?).presence
+      end
+
     end
   end
 end

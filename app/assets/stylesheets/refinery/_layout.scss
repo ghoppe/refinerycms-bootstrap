@@ -766,12 +766,13 @@ body.dialog form {
   height: 250px;
 }
 .dialog {
+/*
   #dialog_main {
     float: left;
     margin-left: 130px;
     min-height: 405px;
     width: 696px;
-  }
+  } */
   span.radio {
     display: block;
     line-height: 18px;
@@ -781,12 +782,13 @@ body.dialog form {
     cursor: pointer;
     font-weight: bold;
   }
+  /*
   #dialog_menu_left {
     position: fixed;
     left: 12px;
     top: 9px;
     width: 130px;
-  }
+  } */
   #existing_image_content {
     position: relative;
     height: 300px;

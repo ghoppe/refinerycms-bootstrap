@@ -1,0 +1,9 @@
+<% content_for :javascripts do %>
+  <script type="text/javascript">
+  function select_image() {
+  var CKEditorFuncNum = <?php echo $_GET['CKEditorFuncNum']; ?>;
+  window.parent.opener.CKEDITOR.tools.callFunction( CKEditorFuncNum, '/3.jpg', '' );
+  self.close();
+  }
+  </script>
+<% end %>
