@@ -874,7 +874,6 @@ var image_picker = {
     var size = this.picker.options.thumbnail || 'original';
     this.image.src = $(this.image).attr('data-' + size);
     current_image = $(this.container).find(this.picker.options.image_display);
-    alert(JSON.stringify(this.image.src));
     current_image.replaceWith(
       $("<img src='"+this.image.src+"' id='"+current_image.attr('id')+"' class='"+this.picker.options.image_display.replace(/^./, '')+" brown_border' />")
     );
