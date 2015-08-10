@@ -1,7 +1,3 @@
-<div id="actions" class="col-lg-3 col-lg-push-6 col-md-3 col-md-push-6 col-sm-9">
-  <%= render 'actions' %>
-</div>
-<div id="records" class="col-lg-6 col-lg-pull-3 col-md-6 col-md-pull-3 col-sm-9 tree">
-  <%= render 'records' %>
-</div>
+<%= render '/refinery/admin/index', { :records_class => "col-md-8 col-md-pull-4 col-sm-12 tree" } %>
+
 <%= render '/refinery/admin/make_sortable', options: {tree: true, replaceContentsAfterUpdate: true} if @pages.many? -%>

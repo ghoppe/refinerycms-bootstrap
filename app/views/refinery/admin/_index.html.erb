@@ -1,6 +1,6 @@
-<div id="actions" class="col-lg-3 col-lg-push-6 col-md-3 col-md-push-6 col-sm-9">
+<div id="actions" class="<%= local_assigns.fetch :actions_class, 'col-md-4 col-md-push-8 col-sm-12' -%>">
   <%= render 'actions' %>
 </div>
-<div id="records" class="col-lg-6 col-lg-pull-3 col-md-6 col-md-pull-3 col-sm-9">
+<div id="records" class="<%= local_assigns.fetch :records_class, 'col-md-8 col-md-pull-4 col-sm-12' -%>">
   <%= render 'records' %>
 </div>
