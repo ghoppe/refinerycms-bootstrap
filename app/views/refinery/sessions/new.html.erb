@@ -3,28 +3,30 @@
 <div class="well">
 <%= form_for resource, :as => resource_name,
                        :url => refinery.refinery_user_session_path do |f| %>
-  <div class='form-group session_username'>
+  <div class="form-group session_username">
     <%= f.label :login %>
     <%= f.text_field :login, :class => 'form-control input-lg' %>
   </div>
-  <div class='form-group session_password'>
+  <div class="form-group session_password">
     <%= f.label :password %>
     <%= f.password_field :password, :autocomplete => 'off', :class => 'form-control input-lg' %>
   </div>
-  <div class='pull-right'>
-    <%= link_to t('.forgot_password'), refinery.new_refinery_user_password_path %>
-  </div>
-  <div class='form-group'>
-    <% if devise_mapping.rememberable? %>
-      <div class='checkbox'>
-      	<label>
-          <%= f.check_box :remember_me %> <%= f.label :remember_me %>
-        </label>
-      </div>
-    <% end %>
+  <div class="row">
+    <div class="form-group col-sm-6">
+      <% if devise_mapping.rememberable? %>
+        <div class='checkbox'>
+          <label>
+            <%= f.check_box :remember_me %> <%= f.label :remember_me %>
+          </label>
+        </div>
+      <% end %>
+    </div>
+    <div class="col-sm-6">
+      <%= link_to t('.forgot_password'), refinery.new_refinery_user_password_path %>
+    </div>
   </div>
   <%= render '/refinery/admin/form_actions', :f => f,
              :submit_button_text => t('.sign_in'),
              :hide_cancel => true %>
-<% end -%>
+  <% end -%>
 </div>
