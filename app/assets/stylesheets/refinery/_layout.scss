@@ -29,7 +29,10 @@ label[for] {
   font-size: 13px;
   margin: 0px auto 15px auto;
   text-align: left;
-  background-image: -webkit-linear-gradient(left, transparent, transparent 120px, white 120px, white 100%);
+
+  a {
+    text-decoration: none;
+  }
 
   @include rounded($standard_rounding);
   position: relative;
@@ -162,9 +165,7 @@ noscript .flash.flash_alert a, noscript .flash.flash_alert a:hover {
   background-repeat: repeat-y;
 }
 #content {
-  padding: 0px;
   a {
-    border-bottom: 1px dotted #727272;
     &.locale {
       border-bottom: 0;
       display:inline;
@@ -209,7 +210,8 @@ noscript .flash.flash_alert a, noscript .flash.flash_alert a:hover {
   background-color: white;
 }
 #admin_container #content {
-  margin-top: 20px;
+  margin-top: 15px;
+  padding-top: 15px;
 }
 .login #content {
   background: none; /* bootstrap */
@@ -782,13 +784,10 @@ body.dialog form {
     cursor: pointer;
     font-weight: bold;
   }
-  /*
   #dialog_menu_left {
     position: fixed;
-    left: 12px;
-    top: 9px;
-    width: 130px;
-  } */
+    left: 20px;
+  }
   #existing_image_content {
     position: relative;
     height: 300px;
@@ -802,12 +801,11 @@ body.dialog form {
       li {
         list-style: none;
         padding: 0px;
-        margin: 0px 2px 0px 0px;
         float: left;
-        height: 114px;
-        max-height: 114px;
-        width: 114px;
-        max-width: 114px;
+        height: 112px;
+        max-height: 112px;
+        width: 112px;
+        max-width: 112px;
         overflow: hidden;
         cursor: pointer;
         text-align: center;
@@ -1047,6 +1045,13 @@ ul#page_parts_controls img {
 .visual_editor_dialog .form-actions, #content.form-actions.dialog-form-actions, .ui-dialog .form-actions {
   margin-top: 16px;
 }
+#content .form-actions {
+  border-top: 1px solid #999;
+  min-height: 76px;
+  padding-top: 15px;
+  padding-bottom: 15px;
+}
+
 #content .form-actions .form-actions-left, #content .form-actions .form-actions-right,
   .visual_editor_dialog .form-actions .form-actions-left, .visual_editor_dialog .form-actions .form-actions-right,
   .ui-dialog .form-actions .form-actions-left, .ui-dialog .form-actions .form-actions-right {

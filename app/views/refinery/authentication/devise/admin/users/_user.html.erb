@@ -1,0 +1,26 @@
+<li class='clearfix record <%= cycle("on", "on-hover") %>' id="sortable_<%= user.id -%>">
+  <span class='title'>
+    <strong><%= user.username %></strong>
+    <span class="preview">
+      <%= t('.preview', :who => user.email, :created_at => l(user.created_at, :format => :short)) %>
+    </span>
+  </span>
+
+  <div class='pull-right'>
+      <div class="btn-group btn-group-xs">
+      <%= link_to refinery_icon_tag('delete.png'),
+                refinery.authentication_devise_admin_user_path(user),
+                :class => "cancel confirm-delete",
+                :title => t('delete', :scope => 'refinery.authentication.devise.admin.users'),
+                :method => :delete,
+                :data => {
+                  :confirm => t('message', :scope => 'refinery.authentication.devise.admin.delete', :title => user.username)
+                } if current_refinery_user.can_delete?(user) %>
+      <%= mail_to user.email, refinery_icon_tag('email_go.png'),
+                :title => t('.email_user') %>
+      <%= link_to refinery_icon_tag('application_edit.png'),
+                  refinery.edit_authentication_devise_admin_user_path(user),
+                :title => t('edit', :scope => 'refinery.authentication.devise.admin.users') if current_refinery_user.can_edit?(user) %>
+      </div>
+  </div>
+</li>
