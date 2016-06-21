@@ -3,9 +3,9 @@ module BootstrapHelper
     content_tag :span, nil, class: names.map{|name| "glyphicon-#{name.to_s.gsub('_','-')}" }.unshift('glyphicon').join(' ')
   end
 
-  def alert_class(*key)
+  def alert_class(status)
     base_class = "alert"
-    case key
+    case status.to_s
     when 'alert'
       base_class << " alert-warning"
     when 'notice'
